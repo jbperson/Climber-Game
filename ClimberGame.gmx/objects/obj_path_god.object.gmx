@@ -27,14 +27,11 @@
             <kind>1</kind>
             <string>path_maps_create()
 
-with(obj_test_zone)
-{
-    event_perform(ev_other,ev_user0)
-}
-
 with(obj_path_starter)
 {
     event_perform(ev_other,ev_user0)
+    
+    instance_destroy()
 }
 </string>
           </argument>
@@ -63,6 +60,8 @@ with(obj_path_starter)
 for (i = 0 ; i &lt; global.path_list_count ; i++)
 {
     path_to_draw = global.path_list[i]
+    /*if (ds_map_find_value(global.path_map_climbable,path_to_draw))
+        draw_set_color(c_orange)    // draw climbing paths in orange*/
 
     for (j = 1 ; j &lt; path_get_number(path_to_draw) ; j++)
     {
@@ -75,6 +74,8 @@ for (i = 0 ; i &lt; global.path_list_count ; i++)
                     path_get_point_x(path_to_draw,0),path_get_point_y(path_to_draw,0))
     }
 }
+
+//draw_set_color(c_black) //  return color to black if it was set to orange
 </string>
           </argument>
         </arguments>

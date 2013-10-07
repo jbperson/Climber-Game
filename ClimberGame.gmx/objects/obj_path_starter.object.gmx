@@ -3,7 +3,7 @@
   <spriteName>spr_player_circle</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,14 +27,36 @@
             <kind>1</kind>
             <string>// Remember, this object MUST be created after each of the path points have been created in-world
 
+associated_path = path_add()
+path_set_closed(associated_path,false)
+global.temp_associated_path = associated_path
+
 with(collision_point(x,y,obj_block_path_point_parent,false,true))
 {
+    associated_path = global.temp_associated_path
+
     event_perform(ev_other,ev_user0)
     
     global.path_list[global.path_list_count] = associated_path
     
     global.path_list_count++
+}
+
+with(collision_point(x,y,obj_block_path_point_climb_parent,false,true))
+{
+    associated_path = global.temp_associated_path
+
+        show_message("here 1")
     
+    event_perform(ev_other,ev_user0)
+    
+    show_message("there 1")
+    
+    global.path_list[global.path_list_count] = associated_path
+    
+    global.path_list_count++
+
+    //ds_map_add(global.path_map_climbable,associated_path,1) //  if there is a climbing path, add it to the climbable path map
 }
 </string>
           </argument>

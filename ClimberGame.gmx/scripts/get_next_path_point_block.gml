@@ -12,7 +12,7 @@ while (test_next_block == noone)
     
     test_next_block = collision_point(test_x,test_y,obj_block_path_point_parent,false,true)
     
-    if (test_x > 50000 || test_y > 50000) // replace this with a better clause
+    if (abs(test_x) > 50000 || abs(test_y) > 50000) // replace this with a better clause
     {
         exit
     }
@@ -20,5 +20,7 @@ while (test_next_block == noone)
 
 with(test_next_block)
 {
+    associated_path = global.temp_associated_path
+
     event_perform(ev_other,ev_user0)
 }
