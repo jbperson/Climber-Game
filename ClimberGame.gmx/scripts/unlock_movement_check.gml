@@ -6,8 +6,17 @@
     collision_line(x+16,y-16,x+16,y-24  ,obj_block_parent,true,true)  ||
     collision_line(x+16,y+16,x+16,y+8   ,obj_block_parent,true,true)    )) */
 
-if (!place_meeting(x,y+8,obj_block_parent) && !movement_climbable_surface)
+temp_ground_direction = get_direction_perpendicular_to_ground()
+
+    //  --> previous condition : "!place_meeting(x,y+8,obj_block_parent)"
+if ( temp_ground_direction >= 180 && temp_ground_direction <= 360 && !movement_climbable_surface)
 {
+    //show_message("tempground:")
+    //show_message(temp_ground_direction)
+    //show_message("direction")
+    //show_message(direction)
+    path_position -= path_speed/path_get_length(movement_path)
+    show_message("unlocking")
     movement_locked = false
     tempspeed = abs(path_speed)
     tempdirection = previous_direction   //  store speed and direction to reset it. Use previous direction in case you just walked off of a cliff
@@ -29,4 +38,7 @@ if (!place_meeting(x,y+8,obj_block_parent) && !movement_climbable_surface)
     movement_currently_climbing = false //  stop climbing
                                 
     sprite_index = spr_player_circle
+    
+    y += 2
+    vspeed += 1
 }

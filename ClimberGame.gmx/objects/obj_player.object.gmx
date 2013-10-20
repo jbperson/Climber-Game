@@ -26,6 +26,34 @@
           <argument>
             <kind>1</kind>
             <string>move_player() // Moves the player due to their own control.
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>rotate_world()
+
+if (movement_path == obj_world.associated_path &amp;&amp; movement_locked)
+    make_player_world_path(1)
 </string>
           </argument>
         </arguments>
@@ -52,15 +80,18 @@
 
 movement_locked = true // Signifies that the player is locked to a movement path
 movement_controlled = true // Signifies that the player can control their movement - off when sliding, for example
-movement_climbable_surface = true // When true, signifies that the player is on a climbable slope.
-movement_currently_climbing = true //  when true, signifies that the player is on a slope that would not be walkable, but is climbable
-movement_path = test_climb_path_0 // sets starting movement path
+movement_climbable_surface = false // When true, signifies that the player is on a climbable slope.
+movement_currently_climbing = false //  when true, signifies that the player is on a slope that would not be walkable, but is climbable
+movement_path = obj_world.associated_path//test_path_1 // sets starting movement path
 
 jump_timer = 0
 
-path_start(movement_path,0,2,true)
+world_path_length = 3
+make_player_world_path(1)
 
-path_position = .1
+path_start(movement_path,0,2,false)
+
+path_position = .5
 held_key = 0
 h_right_is_forward = 1
 v_up_is_forward = 0
@@ -71,16 +102,38 @@ previous_direction = 0
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="8">
       <action>
         <libid>1</libid>
-        <id>223</id>
+        <id>332</id>
         <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>0</useapplyto>
         <exetype>1</exetype>
-        <functionname>action_current_room</functionname>
+        <functionname>action_end_game</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>

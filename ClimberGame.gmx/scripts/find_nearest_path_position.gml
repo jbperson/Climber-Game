@@ -1,6 +1,7 @@
 // This function finds the nearest point along a path (argument0) as the variables new_path_point_x and new_path_point_y, as well as the path position
         // as the variable new_path_position, and the new path direction as the varialbe new_path_direction
-
+//show_message("finding")
+        
 path_to_check = argument0
 
 path_to_check_segment = 0
@@ -26,18 +27,28 @@ for (i = 0 ; i < path_to_check_point_count ; i++)
 {
     if ((path_get_point_x(path_to_check,(i+1)%path_to_check_point_count) - path_get_point_x(path_to_check,(i)%path_to_check_point_count)) != 0)
     {
+        //show_message("i")
         segment_slope = (path_get_point_y(path_to_check,(i+1)%path_to_check_point_count) - path_get_point_y(path_to_check,(i)%path_to_check_point_count)) 
                         /   (path_get_point_x(path_to_check,(i+1)%path_to_check_point_count) - path_get_point_x(path_to_check,(i)%path_to_check_point_count))
         
         segment_intercept = path_get_point_y(path_to_check,i) - (segment_slope * path_get_point_x(path_to_check,i))
        
-        if ( (y < get_line_y(segment_slope,x,segment_intercept) && (y-lengthdir_y(abs(speed),direction)) >= get_line_y(segment_slope,(x-lengthdir_x(abs(speed),direction)),segment_intercept))
-            ||  (y >= get_line_y(segment_slope,x,segment_intercept) && (y-lengthdir_y(abs(speed),direction)) < get_line_y(segment_slope,(x-lengthdir_x(abs(speed),direction)),segment_intercept)) )    //  if we crossed the segment
-        {
-    
-            new_point_x = (segment_intercept - player_movement_intercept) / (player_movement_slope - segment_slope)
-            new_point_y = get_line_y(segment_slope,new_point_x,segment_intercept)
-        
+        //if ( (y < get_line_y(segment_slope,x,segment_intercept) && (y-lengthdir_y(abs(2*speed),direction)) >= get_line_y(segment_slope,(x-lengthdir_x(abs(speed),direction)),segment_intercept))
+          //  ||  (y >= get_line_y(segment_slope,x,segment_intercept) && (y-lengthdir_y(abs(2*speed),direction)) < get_line_y(segment_slope,(x-lengthdir_x(abs(speed),direction)),segment_intercept)) )    //  if we crossed the segment
+        //{
+            if (abs(x - (x-lengthdir_x(abs(speed),direction))) >= .25)
+            {
+                //show_message("BUT HERE")
+                new_point_x = (segment_intercept - player_movement_intercept) / (player_movement_slope - segment_slope)
+                new_point_y = get_line_y(segment_slope,new_point_x,segment_intercept)
+            }
+            else
+            {
+                //show_message("in here")
+                new_point_x = x
+                new_point_y = get_line_y(segment_slope,new_point_x,segment_intercept)
+            }
+                
             if (point_distance((x-lengthdir_x(abs(speed),direction)),(y-lengthdir_y(abs(speed),direction)),new_point_x,new_point_y) < point_distance((x-lengthdir_x(abs(speed),direction)),(y-lengthdir_y(abs(speed),direction)),new_path_point_x,new_path_point_y))
             {
                 new_path_point_x = new_point_x
@@ -47,8 +58,8 @@ for (i = 0 ; i < path_to_check_point_count ; i++)
 
                 new_path_direction = point_direction(new_point_x,new_point_y,path_get_point_x(path_to_check,i),path_get_point_y(path_to_check,i))
             }   //  if the new segment crossed was closer to the old point  
-        }
-    }
+        //}
+    } // if the player didnt hit a horizontal line
     else
     {   
         if ((x < path_get_point_x(path_to_check,(i) % path_to_check_point_count) && x - lengthdir_x(abs(speed),direction) >= path_get_point_x(path_to_check,(i) % path_to_check_point_count))
@@ -67,7 +78,9 @@ for (i = 0 ; i < path_to_check_point_count ; i++)
                 new_path_direction = point_direction(new_point_x,new_point_y,path_get_point_x(path_to_check,i),path_get_point_y(path_to_check,i))
             }   //  if the new segment crossed was closer to the old point 
         }
-    }
+    } // else if the layer hit a horizontal line
     
     path_to_check_covered_distance += point_distance(path_get_point_x(path_to_check,i),path_get_point_y(path_to_check,i),path_get_point_x(path_to_check,(i+1)%path_to_check_point_count),path_get_point_y(path_to_check,(i+1)%path_to_check_point_count))
 }   //  for each segment in the path
+
+//show_message("end")

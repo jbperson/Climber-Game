@@ -3,10 +3,11 @@
 if (direction != previous_direction)
 {
 
-    if (direction % 180 != previous_direction % 180 && keyboard_check(vk_space) && jump_timer != 7) //  if the player is holding spaces but didn't just jump and didn't just turn around
+    if (abs((direction % 180) - (previous_direction % 180)) > 5 && keyboard_check(vk_space) && jump_timer != 7) //  if the player is holding spaces but didn't just jump and didn't just turn around
     {
         if (keyboard_check(vk_right) && (((direction + 90) % 360) < ((previous_direction + 90) % 360)))
         {
+            //show_message("right")
             movement_locked = false
             tempspeed = abs(previous_path_speed)
             tempdirection = previous_direction   //  store speed and direction to reset it
@@ -33,6 +34,7 @@ if (direction != previous_direction)
         
         if (keyboard_check(vk_left) && (((direction) % 360) > ((previous_direction) % 360)))
         {
+            //show_message("left")
             movement_locked = false
             tempspeed = abs(previous_path_speed)
             tempdirection = previous_direction   //  store speed and direction to reset it

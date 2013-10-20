@@ -16,11 +16,23 @@
     <sprite>sprites\spr_block_path_point_down</sprite>
     <sprite>sprites\spr_block_path_point_left</sprite>
     <sprite>sprites\spr_block_path_point_right</sprite>
+    <sprite>sprites\spr_block_path_point_UL_concave</sprite>
+    <sprite>sprites\spr_block_path_point_UR_concave</sprite>
+    <sprite>sprites\spr_block_path_point_DR_concave</sprite>
+    <sprite>sprites\spr_block_path_point_DL_concave</sprite>
     <sprite>sprites\spr_block_path_point_UL</sprite>
+    <sprite>sprites\spr_block_path_point_climb_UL</sprite>
     <sprite>sprites\spr_block_path_point_UR</sprite>
     <sprite>sprites\spr_block_path_point_DR</sprite>
     <sprite>sprites\spr_block_path_point_DL</sprite>
+    <sprite>sprites\spr_block_path_point_climb_UL_concave</sprite>
+    <sprite>sprites\spr_block_path_point_climb_UR_concave</sprite>
+    <sprite>sprites\spr_block_path_point_climb_DR_concave</sprite>
+    <sprite>sprites\spr_block_path_point_climb_DL_concave</sprite>
     <sprite>sprites\spr_test_zone</sprite>
+    <sprite>sprites\spr_globe_full</sprite>
+    <sprite>sprites\spr_globe_half</sprite>
+    <sprite>sprites\spr_badstuff</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -29,48 +41,102 @@
     <path>paths\test_path_0</path>
     <path>paths\test_path_1</path>
     <path>paths\test_climb_path_0</path>
+    <path>paths\path_test_2</path>
+    <path>paths\test_path_3</path>
+    <path>paths\test_path_4</path>
+    <path>paths\test_path_5</path>
+    <path>paths\test_path_6</path>
+    <path>paths\test_climb_path_2</path>
+    <path>paths\test_climb_path_3</path>
+    <path>paths\test_climb_path_4</path>
+    <path>paths\test_climb_path_5</path>
+    <path>paths\test_climb_path_1</path>
   </paths>
   <scripts name="scripts">
-    <script>scripts\move_player.gml</script>
-    <script>scripts\unlock_movement_check.gml</script>
-    <script>scripts\slide_check.gml</script>
-    <script>scripts\check_falling_collisions.gml</script>
-    <script>scripts\find_nearest_path_position.gml</script>
+    <scripts name="Player Movement">
+      <script>scripts\move_player.gml</script>
+      <script>scripts\unlock_movement_check.gml</script>
+      <script>scripts\slide_check.gml</script>
+      <script>scripts\check_falling_collisions.gml</script>
+      <script>scripts\find_nearest_path_position.gml</script>
+      <script>scripts\auto_jump_check.gml</script>
+      <script>scripts\jump_player.gml</script>
+      <script>scripts\get_direction_perpendicular_to_ground.gml</script>
+      <script>scripts\jump_from_climb.gml</script>
+      <script>scripts\move_along_path.gml</script>
+    </scripts>
     <script>scripts\get_line_y.gml</script>
-    <script>scripts\auto_jump_check.gml</script>
-    <script>scripts\jump_player.gml</script>
-    <script>scripts\get_direction_perpendicular_to_ground.gml</script>
-    <script>scripts\jump_from_climb.gml</script>
-    <script>scripts\move_along_path.gml</script>
     <script>scripts\path_maps_create.gml</script>
+    <script>scripts\path_maps_create_test_lvl.gml</script>
+    <script>scripts\path_maps_create_jo_lvl.gml</script>
     <script>scripts\change_paths_check.gml</script>
     <script>scripts\get_segment_direction.gml</script>
     <script>scripts\change_key_check.gml</script>
     <script>scripts\get_next_path_point_block.gml</script>
+    <script>scripts\get_next_path_point_block_climb.gml</script>
+    <script>scripts\rotate_paths_clockwise.gml</script>
+    <script>scripts\rotate_paths_counterclockwise.gml</script>
+    <script>scripts\rotate_world.gml</script>
+    <script>scripts\script20.gml</script>
+    <script>scripts\make_player_world_path.gml</script>
+    <script>scripts\script22.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_block_test</object>
+    <object>objects\obj_world</object>
     <object>objects\obj_block_big_test</object>
+    <object>objects\obj_block_big_test_3</object>
+    <object>objects\obj_block_big_test_4</object>
+    <object>objects\obj_block_big_test_5</object>
+    <object>objects\obj_block_big_test_6</object>
     <object>objects\obj_climb_block_test</object>
+    <object>objects\obj_climb_block_test_1</object>
+    <object>objects\obj_climb_block_test_2</object>
+    <object>objects\obj_climb_block_test_3</object>
+    <object>objects\obj_climb_block_test_4</object>
+    <object>objects\obj_climb_block_test_5</object>
     <object>objects\gtest</object>
     <object>objects\obj_block_parent</object>
     <object>objects\obj_climb_block_parent</object>
     <object>objects\object5</object>
     <object>objects\obj_path_god</object>
+    <object>objects\obj_path_god_test_lvl</object>
+    <object>objects\obj_path_god_jo_lvl</object>
     <object>objects\obj_block_path_point_parent</object>
+    <object>objects\obj_block_path_point_climb_parent</object>
+    <object>objects\obj_block_path_point_climb_UL</object>
+    <object>objects\obj_block_path_point_climb_UR</object>
+    <object>objects\obj_block_path_point_climb_DR</object>
+    <object>objects\obj_block_path_point_climb_DL</object>
     <object>objects\obj_block_path_point_UL</object>
     <object>objects\obj_block_path_point_DL</object>
     <object>objects\obj_block_path_point_DR</object>
     <object>objects\obj_block_path_point_UR</object>
+    <object>objects\obj_block_path_point_UL_concave</object>
+    <object>objects\obj_block_path_point_UR_concave</object>
+    <object>objects\obj_block_path_point_DR_concave</object>
+    <object>objects\obj_block_path_point_DL_concave</object>
     <object>objects\obj_path_starter</object>
     <object>objects\obj_test_zone</object>
+    <object>objects\obj_rot_god</object>
+    <object>objects\obj_test_thing</object>
+    <object>objects\obj_draw_test_thing</object>
+    <object>objects\obj_draw_lines_world_path</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room1</room>
+    <room>rooms\jo_lvl</room>
+    <room>rooms\jo_lvl_tmp</room>
+    <room>rooms\test_lvl</room>
     <room>rooms\room0</room>
+    <room>rooms\room1</room>
+    <room>rooms\room2</room>
   </rooms>
-  <constants number="3">
+  <constants number="7">
+    <constant name="WORLD_RADIUS">384</constant>
+    <constant name="ROT_SIN">sin(ROTATION_SPEED*2*pi/360)</constant>
+    <constant name="ROT_COS">cos(ROTATION_SPEED*2*pi/360)</constant>
+    <constant name="ROTATION_SPEED">.5</constant>
     <constant name="STEEPEST_WALKABLE_GRADE">240</constant>
     <constant name="G_FORCE">.4</constant>
     <constant name="MAX_FALL_SPEED">9</constant>
