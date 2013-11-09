@@ -65,6 +65,7 @@ with(obj_player)
 {
     if(movement_locked && movement_path != obj_world.associated_path)
     {
+        image_angle -= ROTATION_SPEED
         temp_position = path_position
         temp_speed = path_speed
         path_end()

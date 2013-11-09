@@ -5,7 +5,7 @@ if( !path_get_closed(movement_path) )
 {
     if ( (path_position + (path_speed/path_get_length(movement_path)) <= 0) && ds_map_find_value(global.path_map_prev,movement_path) != -1 )
     {
-        //show_message("trans 2")
+        show_message("trans 2")
         temp_path_speed = path_speed
         temp_path_position = path_position
         path_end()
@@ -30,7 +30,7 @@ if( !path_get_closed(movement_path) )
     }
     else if ( (path_position + (path_speed/path_get_length(movement_path)) >= 1) && ds_map_find_value(global.path_map_next,movement_path) != -1 )
     {
-        //show_message("trans")
+        show_message("trans")
         //show_message(path_position)
         
         temp_path_speed = path_speed

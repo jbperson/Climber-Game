@@ -57,11 +57,11 @@
     
     placed_into_path = true
     
-    show_message("1")
+    //show_message("1")
     
     get_next_path_point_block_climb()
     
-    show_message("out")
+    //show_message("out")
 }
 else
     path_set_closed(associated_path,true)   // if you were hit and are already on a path, close the current path

@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>associated_point_x = x - 16
-associated_point_y = y + 32
+            <string>associated_point_x = x - 24
+associated_point_y = y + 24
 next_path_point_direction = 0
 </string>
           </argument>

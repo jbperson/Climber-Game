@@ -2,7 +2,9 @@
 
 if (movement_locked)
 {
-    image_angle = direction
+    if (path_speed != 0)
+        image_angle = direction
+        
     if (movement_path == obj_world.associated_path && abs(direction - previous_direction) <= 10)
         previous_direction = direction
 
