@@ -8,7 +8,7 @@ if (r_travel_distance <= 0 && r_travel_distance != -1000) // add new platforms t
     number_of_paths_made = make_block_lists_from_zone_list(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) -  1)) // create platforms
     ds_list_delete(global.right_platform_list,0) // and delete the entry from the right platform list
     if(ds_list_size(global.right_platform_list) != 0)
-        r_travel_distance += ds_list_find_value(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) - 1),2) // and reset right travel distance
+        r_travel_distance = ds_list_find_value(ds_list_find_value(global.right_platform_list,0),0) - (current_world_x + (pi*WORLD_RADIUS)) // and reset right travel distance
     else // there are no more platforms to the right
         r_travel_distance = -1000 // so set to sentinel
     ds_list_add(global.path_destroy_list,number_of_paths_made)

@@ -30,11 +30,11 @@ for(i = 0 ; i < ds_list_size(global.in_world_platform_list) ; i++)
 } // for each zone list in the world right now, create the platforms for it
 
 if (ds_list_size(global.left_platform_list) != 0)
-    l_travel_distance = ds_list_find_value(ds_list_find_value(global.left_platform_list,ds_list_size(global.left_platform_list)-1),2) - (ds_list_find_value(ds_list_find_value(global.in_world_platform_list,0),0) - (current_world_x - (pi * WORLD_RADIUS)))// get distance to travel left until reaching next platform. The '2' is where that data is stored in a zone list
+    l_travel_distance = (current_world_x - (pi*WORLD_RADIUS)) - ds_list_find_value(ds_list_find_value(global.left_platform_list,ds_list_size(global.left_platform_list)-1),0)// - (ds_list_find_value(ds_list_find_value(global.in_world_platform_list,0),0) - (current_world_x - (pi * WORLD_RADIUS)))// get distance to travel left until reaching next platform. The '2' is where that data is stored in a zone list
 else
     l_travel_distance = -1000 // -1000 is the sentinel value for being maximum far left.
     
 if (ds_list_size(global.right_platform_list) != 0)
-    r_travel_distance = ds_list_find_value(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) - 1),2) - ((current_world_x + (pi * WORLD_RADIUS)) - ds_list_find_value(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) - 1),0))// see above
+    r_travel_distance = ds_list_find_value(ds_list_find_value(global.right_platform_list,0),0) - (current_world_x + (pi*WORLD_RADIUS))// - ((current_world_x + (pi * WORLD_RADIUS)) - ds_list_find_value(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) - 1),0))// see above
 else
     r_travel_distance = -1000 // see above
