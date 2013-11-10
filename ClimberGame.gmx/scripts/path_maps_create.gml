@@ -12,5 +12,4 @@ ds_map_add(global.path_map_next,test_climb_path_0,test_path_0)
 global.path_map_climbable = ds_map_create()
 ds_map_add(global.path_map_climbable,test_climb_path_0,1)
 
-var global.path_list[] = -1
-var global.path_list_count = 0
+global.path_list = ds_list_create()

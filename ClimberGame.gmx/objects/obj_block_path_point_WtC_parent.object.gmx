@@ -64,6 +64,12 @@
     path_set_closed(associated_path,false)
     global.temp_destroy_path_count++
     
+    /*global.path_list[global.path_list_count] = associated_path
+    
+    global.path_list_count++*/
+    ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
+    global.temp_path_list_position++
+    
     path_add_point(associated_path,associated_point_x,associated_point_y,100)
     
     ds_map_add(global.path_map_next,temp_path,associated_path)

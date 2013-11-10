@@ -6,8 +6,8 @@
 //show_message(x)
 //show_message(y)
 
-test_x = x + lengthdir_x(16,next_path_point_direction + image_angle)
-test_y = y + lengthdir_y(16,next_path_point_direction + image_angle)
+test_x = x + lengthdir_x(16,next_path_point_direction)
+test_y = y + lengthdir_y(16,next_path_point_direction)
 
 test_next_block = collision_point(test_x,test_y,obj_block_path_point_climb_parent,false,true)
 
@@ -21,11 +21,14 @@ while (test_next_block == noone)
     //show_message(test_x)
     //show_message(test_y)
     
-    ds_stack_push(make_stack,test_x)
-    ds_stack_push(make_stack,test_y)
-
-    test_x += lengthdir_x(16,next_path_point_direction + image_angle)
-    test_y += lengthdir_y(16,next_path_point_direction + image_angle)
+    if(test_x != x && test_y != y)
+    {
+        ds_stack_push(make_stack,test_x)
+        ds_stack_push(make_stack,test_y)
+    }
+        
+    test_x += lengthdir_x(16,next_path_point_direction)
+    test_y += lengthdir_y(16,next_path_point_direction)
     
     test_next_block = collision_point(test_x,test_y,obj_block_path_point_climb_parent,false,true) 
     
@@ -55,8 +58,8 @@ global.temp_parent_block_list = parent_block_list
 with(test_next_block)
 {
     //show_message("7")
-
-    associated_path = global.temp_associated_path
+    if(!placed_into_path)
+        associated_path = global.temp_associated_path
     parent_block_list = global.temp_parent_block_list
 
     event_perform(ev_other,ev_user0)

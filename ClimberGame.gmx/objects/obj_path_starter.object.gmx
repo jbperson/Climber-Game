@@ -32,31 +32,34 @@ path_set_closed(associated_path,false)
 global.temp_associated_path = associated_path
 global.temp_destroy_path_count++ // increment number of paths to destroy
 
- with(collision_point(x,y,obj_block_path_point_parent,false,true))
+with(collision_point(x,y,obj_block_path_point_parent,false,true))
 {
     associated_path = global.temp_associated_path
-
-    event_perform(ev_other,ev_user0)
+        
+    event_perform(ev_other,ev_user0)    // call path creation code. We do this before adding the path to the list because if we append two paths together, we want to add the appended path and not the pre-appended path
     
-    global.path_list[global.path_list_count] = associated_path
+    //global.path_list[global.path_list_count] = associated_path
     
-    global.path_list_count++
+    //show_message("Path List Entry " + string(global.path_list_count) + ": " + string(global.path_list[global.path_list_count]))
+    
+    //global.path_list_count++
+    
+    ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
+    global.temp_path_list_position++
 } 
 
 with(collision_point(x,y,obj_block_path_point_climb_parent,false,true))
 {
     associated_path = global.temp_associated_path
-
-    //show_message("here 1")
-    
+      
     event_perform(ev_other,ev_user0)
     
-    //show_message("there 1")
-    
-    global.path_list[global.path_list_count] = associated_path
-    
-    global.path_list_count++
+    //global.path_list[global.path_list_count] = associated_path
+    //global.path_list_count++
 
+    ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
+    global.temp_path_list_position++
+    
     ds_map_add(global.path_map_climbable,associated_path,1) //  if there is a climbing path, add it to the climbable path map
 }
 

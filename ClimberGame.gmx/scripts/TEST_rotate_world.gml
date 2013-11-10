@@ -8,6 +8,8 @@ if(keyboard_check(ord('D')))
         obj_world_initialize_god.l_travel_distance -= ROTATION_SPEED * pi * WORLD_RADIUS / 180
     if (obj_world_initialize_god.r_travel_distance != -1000)
         obj_world_initialize_god.r_travel_distance += ROTATION_SPEED * pi * WORLD_RADIUS / 180
+        
+    build_new_platforms_left_check()
 }
 if(keyboard_check(ord('A')))
 {

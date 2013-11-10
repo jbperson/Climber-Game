@@ -13,11 +13,14 @@ make_stack = ds_stack_create() // used to stack up coordinates of where to creat
 
 while (test_next_block == noone)
 {
-    ds_stack_push(make_stack,test_x)
-    ds_stack_push(make_stack,test_y)
+    if(test_x != x && test_y != y)
+    {
+        ds_stack_push(make_stack,test_x)
+        ds_stack_push(make_stack,test_y)
+    }
 
-    test_x += lengthdir_x(16,next_path_point_direction + image_angle)
-    test_y += lengthdir_y(16,next_path_point_direction + image_angle)
+    test_x += lengthdir_x(16,next_path_point_direction)
+    test_y += lengthdir_y(16,next_path_point_direction)
     
     test_next_block = collision_point(test_x,test_y,obj_block_path_point_parent,false,true)
     
@@ -46,7 +49,8 @@ global.temp_parent_block_list = parent_block_list
 
 with(test_next_block)
 {
-    associated_path = global.temp_associated_path
+    if(!placed_into_path)
+        associated_path = global.temp_associated_path // only modify associated path if you haven't been put on a path before
     parent_block_list = global.temp_parent_block_list
 
     event_perform(ev_other,ev_user0)

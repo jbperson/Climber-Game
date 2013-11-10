@@ -3,6 +3,7 @@
 global.left_platform_list = ds_list_create()
 global.right_platform_list = ds_list_create()
 global.in_world_platform_list = ds_list_create()
+global.path_destroy_list = ds_list_create()
 
 //current_check_x = ds_list_find_value(ds_list_find_value(global.world_list,0),0)
 
@@ -19,14 +20,13 @@ for(i = 0 ; i < ds_list_size(global.world_list) ; i++)
         ds_list_add(global.right_platform_list,ds_list_find_value(global.world_list,i))
 }
 
+global.temp_path_list_position = 0
+
 for(i = 0 ; i < ds_list_size(global.in_world_platform_list) ; i++)
 {
     temp_direction_destroy_path_count = make_block_lists_from_zone_list(ds_list_find_value(global.in_world_platform_list,i))
     
-    if (i == 0)
-        global.l_destroy_path_count = temp_direction_destroy_path_count
-    if (i == (ds_list_size(global.in_world_platform_list) - 1))
-        global.r_destroy_path_count = temp_direction_destroy_path_count
+    ds_list_add(global.path_destroy_list,temp_direction_destroy_path_count) // add the number of paths to destroy to the path to destroy list
 } // for each zone list in the world right now, create the platforms for it
 
 if (ds_list_size(global.left_platform_list) != 0)

@@ -113,10 +113,8 @@ initial_world_setup()
             <string>show_message("Size of Right Remaining: " + string(ds_list_size(global.right_platform_list)))
 show_message("Size of left remaining:  " + string(ds_list_size(global.left_platform_list)))
 show_message("Size of in world: " + string(ds_list_size(global.in_world_platform_list)))
-show_message("L Paths to destroy: " + string(global.l_destroy_path_count))
-show_message("R Paths to destroy: " + string(global.r_destroy_path_count))
-/*show_message("l_travel: " + string(l_travel_distance))
-show_message("r_travel: " + string(r_travel_distance))
+show_message("l_travel: " + string(l_travel_distance))
+show_message("r_travel: " + string(r_travel_distance))/*
 show_message("current_world_x - left obj x: " + string(current_world_x - ds_list_find_value(ds_list_find_value(global.in_world_platform_list,0),0)))*/
 </string>
           </argument>

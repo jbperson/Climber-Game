@@ -90,14 +90,19 @@
       <script>scripts\initial_world_setup.gml</script>
       <script>scripts\get_next_path_point_block.gml</script>
       <script>scripts\get_next_path_point_block_climb.gml</script>
+      <script>scripts\modify_path_from_append_next_path_point_block.gml</script>
+      <script>scripts\modify_path_from_append_next_path_point_block_climb.gml</script>
       <script>scripts\make_block_lists_from_zone_list.gml</script>
       <script>scripts\make_platforms_from_block_list.gml</script>
       <script>scripts\path_maps_create.gml</script>
     </scripts>
     <scripts name="World Management">
       <script>scripts\build_new_platforms_right_check.gml</script>
+      <script>scripts\build_new_platforms_left_check.gml</script>
       <script>scripts\destroy_in_world_platforms_from_zone_list.gml</script>
       <script>scripts\TEST_rotate_world.gml</script>
+      <script>scripts\destroy_n_paths_from_start_of_path_list.gml</script>
+      <script>scripts\destroy_n_paths_from_end_of_path_list.gml</script>
     </scripts>
     <script>scripts\get_line_y.gml</script>
     <script>scripts\path_maps_create_test_lvl.gml</script>
@@ -132,6 +137,7 @@
     <object>objects\obj_climb_block_parent</object>
     <object>objects\object5</object>
     <object>objects\obj_path_god</object>
+    <object>objects\obj_path_drawer</object>
     <object>objects\obj_path_god_test_lvl</object>
     <object>objects\obj_path_god_jo_lvl</object>
     <object>objects\obj_block_path_point_parent</object>
@@ -182,7 +188,8 @@
     <room>rooms\room0</room>
     <room>rooms\room2</room>
   </rooms>
-  <constants number="7">
+  <constants number="8">
+    <constant name="CORNER_BLOCK_DIST">sqrt(2*(24*24))</constant>
     <constant name="WORLD_RADIUS">384</constant>
     <constant name="ROT_SIN">sin(ROTATION_SPEED*2*pi/360)</constant>
     <constant name="ROT_COS">cos(ROTATION_SPEED*2*pi/360)</constant>

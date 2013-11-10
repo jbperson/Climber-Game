@@ -25,9 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>associated_point_x = x + 24
+            <string>/*associated_point_x = x + 24
 associated_point_y = y - 24
-next_path_point_direction = 180
+next_path_point_direction = 180*/
+associated_point_direction = (45 + image_angle) % 360  //  the 135 here is the only thing that needs to change
+associated_point_x = x + lengthdir_x(CORNER_BLOCK_DIST,associated_point_direction)
+associated_point_y = y + lengthdir_y(CORNER_BLOCK_DIST,associated_point_direction)
+next_path_point_direction = (associated_point_direction + 135) % 360    // the next point direction is always determined by the associatd poitn direction
 </string>
           </argument>
         </arguments>
