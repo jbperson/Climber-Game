@@ -2,6 +2,7 @@
 
 if (movement_locked)
 {
+
     if (path_speed != 0)
         image_angle = direction
         
@@ -9,7 +10,7 @@ if (movement_locked)
         previous_direction = direction
 
     if (movement_controlled && !auto_jump_check())
-    {       
+    {           
     // Regulates Jumping
         if (keyboard_check_pressed(vk_space))
             jump_timer = 7
@@ -28,11 +29,15 @@ if (movement_locked)
         }
         else
             world_path_length = 3*/
-    
-        if (movement_locked)
-            if (!move_along_path())
-                slide_check()   // if the player did not switch paths, do the slide check.
             
+        if (movement_locked)
+            if (!move_along_path())   // IN HERE
+            {
+
+                slide_check()   // if the player did not switch paths, do the slide check.
+            }
+           // else
+         //       show_message("NEW move path : " + string(movement_path)
 
     }
     else    //  else player is sliding
@@ -54,10 +59,17 @@ if (movement_locked)
         }
             
     }
+
+    // BEFORE
     
     if (movement_locked)    //  need to check this after doing auto jump check
+    {
         unlock_movement_check() // after moving, check to see if we should unlock movement for the next step.
+        if(!movement_locked)
+            show_message("unlocked")
+    }
         
+
 }
 else //else movement is unlocked
 {
@@ -76,19 +88,18 @@ else //else movement is unlocked
     {   
         if (temp_block_collided.object_index == obj_world){
             //show_message(point_distance(obj_world.x,obj_world.y,x,y))
+            show_message("on world")
             make_player_world_path(1)
             path_speed = 0
+            set_current_world_adjacency_path_list_index() // sets the ccurrent world adjacency path list index to the proper place in the list
         }
         else
         {
-            //show_message("hit")
             find_nearest_path_position(temp_block_collided.associated_path)
             movement_path = temp_block_collided.associated_path
            
            // show_message(new_path_point_x)
-           // show_message(new_path_point_y)
-             
-              
+           // show_message(new_path_point_y) 
             
             path_start(movement_path,.01,2,true)
             

@@ -11,12 +11,14 @@ temp_ground_direction = get_direction_perpendicular_to_ground()
     //  --> previous condition : "!place_meeting(x,y+8,obj_block_parent)"
 if ( temp_ground_direction >= 180 && temp_ground_direction <= 360 && !movement_climbable_surface)
 {
-    //show_message("tempground:")
+  //  show_message("before tmp: " + string(movement_path))
+  //  show_message("temp ground direction: " + string(temp_ground_direction))
+  //  show_message("tempground:")
     //show_message(temp_ground_direction)
     //show_message("direction")
     //show_message(direction)
     path_position -= path_speed/path_get_length(movement_path)
-    show_message("unlocking")
+    //show_message("unlocking")
     movement_locked = false
     tempspeed = abs(path_speed)
     tempdirection = previous_direction   //  store speed and direction to reset it. Use previous direction in case you just walked off of a cliff

@@ -5,7 +5,7 @@ associated_zone = collision_point(x,y,obj_zone_parent,true,true)
 
 zone_list_to_add_to = ds_map_find_value(global.zone_list_map,associated_zone)
 
-show_message("Adding block list to zone list")
+//show_message("Adding block list to zone list")
 
 block_list = ds_list_create()
 global.temp_list = block_list

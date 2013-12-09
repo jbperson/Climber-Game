@@ -4,6 +4,10 @@ global.left_platform_list = ds_list_create()
 global.right_platform_list = ds_list_create()
 global.in_world_platform_list = ds_list_create()
 global.path_destroy_list = ds_list_create()
+global.world_adjacency_path_list = ds_list_create()
+
+with(obj_world)
+    event_perform(ev_other,ev_room_start)
 
 //current_check_x = ds_list_find_value(ds_list_find_value(global.world_list,0),0)
 
@@ -21,6 +25,7 @@ for(i = 0 ; i < ds_list_size(global.world_list) ; i++)
 }
 
 global.temp_path_list_position = 0
+global.temp_world_adjacency_path_list_position = 0
 
 for(i = 0 ; i < ds_list_size(global.in_world_platform_list) ; i++)
 {
@@ -38,3 +43,10 @@ if (ds_list_size(global.right_platform_list) != 0)
     r_travel_distance = ds_list_find_value(ds_list_find_value(global.right_platform_list,0),0) - (current_world_x + (pi*WORLD_RADIUS))// - ((current_world_x + (pi * WORLD_RADIUS)) - ds_list_find_value(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) - 1),0))// see above
 else
     r_travel_distance = -1000 // see above
+    
+player_start_angle = (global.player_start_x - current_world_x) * 180 / (pi* WORLD_RADIUS)
+player_start_dist = (current_world_y - global.player_start_y)
+
+instance_create(lengthdir_x(player_start_dist,90+player_start_angle),lengthdir_y(player_start_dist,90+player_start_angle),obj_player)
+with(obj_player)
+    event_perform(ev_other,ev_room_start)

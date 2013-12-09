@@ -16,5 +16,6 @@ for(i = 0 ; i < n ; i++)
 
 for(i = 0 ; i < n ; i++)
 {
+    path_delete(ds_list_find_value(global.path_list,ds_list_size(global.path_list)-1))
     ds_list_delete(global.path_list,ds_list_size(global.path_list) - 1)
 }

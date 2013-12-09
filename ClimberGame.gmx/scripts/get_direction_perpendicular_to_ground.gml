@@ -7,7 +7,7 @@
 
 if (movement_path != obj_world.associated_path)
 {
-    return(( point_direction(x,y,path_get_x(movement_path,path_position + 1/path_get_length(movement_path)),path_get_y(movement_path,path_position + 1/path_get_length(movement_path))) + 270) % 360)
+    return(( point_direction(path_get_x(movement_path,path_position),path_get_y(movement_path,path_position),path_get_x(movement_path,path_position + 1/path_get_length(movement_path)),path_get_y(movement_path,path_position + 1/path_get_length(movement_path))) + 270) % 360)
     
     /*if (collision_circle(x+lengthdir_x(8,direction+90),y+lengthdir_y(8,direction+90),16,obj_block_parent,true,true))
         return (direction - 90) % 360

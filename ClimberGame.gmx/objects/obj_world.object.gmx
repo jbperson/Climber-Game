@@ -3,7 +3,7 @@
   <spriteName>spr_globe_full</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>15</depth>
   <persistent>0</persistent>
   <parentName>obj_block_parent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,6 +29,7 @@
 path_add_point(associated_path,x,y,100)
 path_add_point(associated_path,x,y,100)
 path_add_point(associated_path,x,y,100)
+parent_block_list = -1 // set this to a null value so that it cannot be destroyed. TEMPORARY
 </string>
           </argument>
         </arguments>

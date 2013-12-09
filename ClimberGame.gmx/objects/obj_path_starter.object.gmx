@@ -30,10 +30,18 @@
 associated_path = path_add()
 path_set_closed(associated_path,false)
 global.temp_associated_path = associated_path
-global.temp_destroy_path_count++ // increment number of paths to destroy
+//global.temp_destroy_path_count++ // increment number of paths to destroy
+global.temp_was_inside_world = false
+
+global.path_inside_world = false
 
 with(collision_point(x,y,obj_block_path_point_parent,false,true))
 {
+    if(collision_point(x,y,obj_world,true,true) != noone)
+        global.temp_was_inside_world = true
+    else
+        global.temp_was_inside_world = false
+
     associated_path = global.temp_associated_path
         
     event_perform(ev_other,ev_user0)    // call path creation code. We do this before adding the path to the list because if we append two paths together, we want to add the appended path and not the pre-appended path
@@ -44,12 +52,19 @@ with(collision_point(x,y,obj_block_path_point_parent,false,true))
     
     //global.path_list_count++
     
-    ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
-    global.temp_path_list_position++
+    
+    
+    //ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
+    //global.temp_path_list_position++
 } 
 
 with(collision_point(x,y,obj_block_path_point_climb_parent,false,true))
 {
+    if(collision_point(x,y,obj_world,true,true) != noone)
+        global.temp_was_inside_world = true
+    else
+        global.temp_was_inside_world = false
+
     associated_path = global.temp_associated_path
       
     event_perform(ev_other,ev_user0)
@@ -57,8 +72,8 @@ with(collision_point(x,y,obj_block_path_point_climb_parent,false,true))
     //global.path_list[global.path_list_count] = associated_path
     //global.path_list_count++
 
-    ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
-    global.temp_path_list_position++
+    //ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
+    //global.temp_path_list_position++
     
     ds_map_add(global.path_map_climbable,associated_path,1) //  if there is a climbing path, add it to the climbable path map
 }

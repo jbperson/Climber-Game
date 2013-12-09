@@ -39,5 +39,8 @@ for(i = 0 ; i < ds_list_size(global.zone_sort_list) ; i++)
 
 with(obj_path_starter)
     add_block_to_zone_list()    //  for every path starter, add its block to zone list
-    
-show_message(ds_list_size(global.world_list))
+  
+global.player_start_x = obj_player_start.x
+global.player_start_y = obj_player_start.y
+      
+//show_message(ds_list_size(global.world_list))

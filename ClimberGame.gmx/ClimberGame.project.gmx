@@ -81,6 +81,8 @@
       <script>scripts\get_direction_perpendicular_to_ground.gml</script>
       <script>scripts\jump_from_climb.gml</script>
       <script>scripts\move_along_path.gml</script>
+      <script>scripts\change_key_check.gml</script>
+      <script>scripts\change_paths_check.gml</script>
     </scripts>
     <scripts name="World Setup">
       <script>scripts\add_next_path_point_to_list.gml</script>
@@ -105,15 +107,19 @@
       <script>scripts\destroy_n_paths_from_end_of_path_list.gml</script>
     </scripts>
     <script>scripts\get_line_y.gml</script>
+    <script>scripts\get_line_y_point_slope.gml</script>
     <script>scripts\path_maps_create_test_lvl.gml</script>
     <script>scripts\path_maps_create_jo_lvl.gml</script>
-    <script>scripts\change_paths_check.gml</script>
     <script>scripts\get_segment_direction.gml</script>
-    <script>scripts\change_key_check.gml</script>
     <script>scripts\rotate_paths_clockwise.gml</script>
     <script>scripts\rotate_paths_counterclockwise.gml</script>
     <script>scripts\rotate_world.gml</script>
     <script>scripts\make_player_world_path.gml</script>
+    <script>scripts\quadratic_root_1.gml</script>
+    <script>scripts\quadratic_root_2.gml</script>
+    <script>scripts\change_path_world_collision.gml</script>
+    <script>scripts\set_current_world_adjacency_path_list_index.gml</script>
+    <script>scripts\TEST_check_world_adjacency_list.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -178,6 +184,7 @@
     <object>objects\obj_draw_lines_world_path</object>
     <object>objects\obj_world_setup_god</object>
     <object>objects\obj_world_initialize_god</object>
+    <object>objects\obj_player_start</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>

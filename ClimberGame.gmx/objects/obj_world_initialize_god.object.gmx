@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>TEST_rotate_world()
+            <string>//TEST_rotate_world()
 </string>
           </argument>
         </arguments>
@@ -48,12 +48,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>world_start_x = 160
-world_start_y = 480
+            <string>world_center_x = 768
+world_center_y = 896
+world_start_x = 128
+world_start_y = 320
 current_world_x = world_start_x
 current_world_y = world_start_y
-world_center_x = 320
-world_center_y = 640
 
 path_maps_create()
 
@@ -89,6 +89,32 @@ initial_world_setup()
           <argument>
             <kind>0</kind>
             <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="75">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for(i = 0 ; i &lt; ds_list_size(global.path_list) ; i++)
+{
+    show_message("Path number " + string(i) + " : " + string(ds_list_find_value(global.path_list,i)))
+}
+</string>
           </argument>
         </arguments>
       </action>

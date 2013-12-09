@@ -35,17 +35,17 @@ with(obj_block_parent)
     y = obj_rot_god.y + lengthdir_y(dist,dir)
 }*/
 
-for (i = 0 ; i < global.path_list_count ; i++)
+for (i = 0 ; i < ds_list_size(global.path_list) ; i++)
 {
-    change_path = global.path_list[i]
+    change_path = ds_list_find_value(global.path_list,i)
     var j
     for(j = 0 ; j < path_get_number(change_path) ; j++)
     {
-        pre_x = path_get_point_x(change_path,j) - obj_rot_god.x
-        pre_y = path_get_point_y(change_path,j) - obj_rot_god.y //  treat rot_god center like an offset
+        pre_x = path_get_point_x(change_path,j) - obj_world_initialize_god.world_center_x
+        pre_y = path_get_point_y(change_path,j) - obj_world_initialize_god.world_center_y //  treat rot_god center like an offset
         pre_cos = ROT_COS//cos(ROTATION_SPEED*2*pi/360)
         pre_sin = ROT_SIN//sin(ROTATION_SPEED*2*pi/360)
-        path_change_point(global.path_list[i],j,pre_x*pre_cos - pre_y*(pre_sin) + obj_rot_god.x,pre_x*(pre_sin) + pre_y*pre_cos + obj_rot_god.y,100)
+        path_change_point(ds_list_find_value(global.path_list,i),j,pre_x*pre_cos - pre_y*(pre_sin) + obj_world_initialize_god.world_center_x,pre_x*(pre_sin) + pre_y*pre_cos + obj_world_initialize_god.world_center_y,100)
     }
     //path_rotate(global.path_list[i],ROTATION_SPEED)
 }
@@ -53,12 +53,12 @@ for (i = 0 ; i < global.path_list_count ; i++)
 with(obj_block_parent)
 {
     image_angle -= ROTATION_SPEED
-    pre_x = x - obj_rot_god.x
-    pre_y = y - obj_rot_god.y //  treat rot_god center like an offset
+    pre_x = x - obj_world_initialize_god.world_center_x
+    pre_y = y - obj_world_initialize_god.world_center_y //  treat rot_god center like an offset
     pre_cos = ROT_COS//cos(ROTATION_SPEED*2*pi/360)
     pre_sin = ROT_SIN//sin(ROTATION_SPEED*2*pi/360)
-    x = pre_x*pre_cos - pre_y*pre_sin + obj_rot_god.x
-    y = pre_x*pre_sin + pre_y*pre_cos + obj_rot_god.y
+    x = pre_x*pre_cos - pre_y*pre_sin + obj_world_initialize_god.world_center_x
+    y = pre_x*pre_sin + pre_y*pre_cos + obj_world_initialize_god.world_center_y
 }
 
 with(obj_player)
@@ -75,11 +75,11 @@ with(obj_player)
     else if (movement_locked)
     {
         image_angle -= ROTATION_SPEED
-        pre_x = x - obj_rot_god.x
-        pre_y = y - obj_rot_god.y //  treat rot_god center like an offset
+        pre_x = x - obj_world_initialize_god.world_center_x
+        pre_y = y - obj_world_initialize_god.world_center_y //  treat rot_god center like an offset
         pre_cos = ROT_COS//cos(ROTATION_SPEED*2*pi/360)
         pre_sin = ROT_SIN//sin(ROTATION_SPEED*2*pi/360)
-        x = pre_x*pre_cos - pre_y*pre_sin + obj_rot_god.x
-        y = pre_x*pre_sin + pre_y*pre_cos + obj_rot_god.y    
+        x = pre_x*pre_cos - pre_y*pre_sin + obj_world_initialize_god.world_center_x
+        y = pre_x*pre_sin + pre_y*pre_cos + obj_world_initialize_god.world_center_y  
     }
 }

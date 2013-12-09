@@ -25,9 +25,56 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>move_player() // Moves the player due to their own control.
+            <string>if(changed_paths)
+{
+     //   show_message("yup")
+       // show_message("pos:  " + string(x) + "," + string(y))
+      //  show_message("Should be pos " + string(path_get_x(movement_path,path_position)) + "," + string(path_get_y(movement_path,path_position)))
+        //changed_paths = false
+        ccc = true
+        
+   /*     temp_pos = path_position
+        temp_speed = path_speed
+        path_end()
+        x = path_get_x(movement_path,path_position)
+        y = path_get_y(movement_path,path_position)
+        path_start(movement_path,path_speed,2,true)
+        path_position = temp_pos */
+}
 
 
+move_player() // Moves the player due to their own control.
+
+if(ccc)
+{
+
+      //  show_message("yup2")
+      //  show_message("pos:  " + string(x) + "," + string(y))
+      //  show_message("Should be pos " + string(path_get_x(movement_path,path_position)) + "," + string(path_get_y(movement_path,path_position)))
+        ccc = false
+        changed_paths = false
+        
+        temp_pos = path_position
+        temp_speed = changed_paths_temp_speed
+    //    show_message("changed paths temp speed: " + string(changed_paths_temp_speed))
+ //       show_message("0: " + string(x) + "," + string(y))
+        path_end()
+   //             show_message("1: " + string(x) + "," + string(y))
+        x = path_get_x(movement_path,path_position)
+        y = path_get_y(movement_path,path_position)
+     //   show_message("2: " + string(x) + "," + string(y))
+        path_start(movement_path,path_speed,2,true)
+       // show_message("3: " + string(x) + "," + string(y))
+        
+        path_position = temp_pos 
+                x = path_get_x(movement_path,path_position)
+        y = path_get_y(movement_path,path_position)
+  //      show_message("4 : " + string(x) + "," + string(y))
+    //            show_message("pathposition :" + string(path_position))
+        
+        tomohawk = 1; 
+
+}
 </string>
           </argument>
         </arguments>
@@ -50,10 +97,25 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>rotate_world()
+            <string>if(tomohawk)
+{
+//    show_message("prerotTOMA")
+  //  show_message("toma path pos " + string(path_position))
+    //show_message("toma pos: " + string(x) + "," + string(y))
+}
+
+rotate_world()
 
 if (movement_path == obj_world.associated_path &amp;&amp; movement_locked)
     make_player_world_path(1)
+    
+if(tomohawk)
+{
+  //  show_message("TOMA")
+//    show_message("toma path pos " + string(path_position))
+  //  show_message("toma pos: " + string(x) + "," + string(y))
+    tomohawk = 0
+}
 </string>
           </argument>
         </arguments>
@@ -83,6 +145,9 @@ movement_controlled = true // Signifies that the player can control their moveme
 movement_climbable_surface = false // When true, signifies that the player is on a climbable slope.
 movement_currently_climbing = false //  when true, signifies that the player is on a slope that would not be walkable, but is climbable
 movement_path = obj_world.associated_path//test_path_1 // sets starting movement path
+changed_paths = false
+ccc = false
+tomohawk = 0;
 
 jump_timer = 0
 
@@ -119,7 +184,32 @@ previous_direction = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>changed_paths = false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//TEST_check_world_adjacency_list()
+show_message("Position:  " + string(x) + ", " + string(y))
+</string>
           </argument>
         </arguments>
       </action>
