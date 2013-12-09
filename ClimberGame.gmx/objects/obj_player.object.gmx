@@ -208,7 +208,17 @@ previous_direction = 0
           <argument>
             <kind>1</kind>
             <string>//TEST_check_world_adjacency_list()
-show_message("Position:  " + string(x) + ", " + string(y))
+//show_message("Position:  " + string(x) + ", " + string(y))
+//show_message("World path : " + string(obj_world.associated_path))
+show_message("prev map size: " + string(ds_map_size(global.path_map_prev)))
+
+tempkey = ds_map_find_first(global.path_map_prev)
+    show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_prev,tempkey)))
+while(tempkey != ds_map_find_last(global.path_map_prev))
+{
+        tempkey = ds_map_find_next(global.path_map_prev,tempkey)
+    show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_prev,tempkey)))
+}
 </string>
           </argument>
         </arguments>

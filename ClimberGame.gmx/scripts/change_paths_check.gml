@@ -10,20 +10,27 @@ if( !path_get_closed(movement_path) && movement_path != obj_world.associated_pat
         temp_path_position = path_position
         path_end()
         movement_path = ds_map_find_value(global.path_map_prev,movement_path)
-        path_start(movement_path,temp_path_speed,2,true)
-        path_position = ( (temp_path_position + (temp_path_speed/path_get_length(movement_path))) ) % 1
-            
-        if (ds_map_find_value(global.path_map_climbable,movement_path))
+        if(movement_path != obj_world.associated_path) // if you weren't moved onto the world 
         {
-            movement_climbable_surface = 1
-            slide_check()
+            path_start(movement_path,temp_path_speed,2,true)
+            path_position = ( (temp_path_position + (temp_path_speed/path_get_length(movement_path))) ) % 1
+            
+            if (ds_map_find_value(global.path_map_climbable,movement_path))
+            {
+                movement_climbable_surface = 1
+                slide_check()
+            }
+            else
+            {
+                movement_currently_climbing = 0
+                movement_climbable_surface = 0
+            
+                slide_check()
+            }
         }
-        else
+        else // you were moved onto the world
         {
-            movement_currently_climbing = 0
-            movement_climbable_surface = 0
-            
-            slide_check()
+            make_player_world_path(1)
         }
         
         return 1
@@ -35,25 +42,36 @@ if( !path_get_closed(movement_path) && movement_path != obj_world.associated_pat
         
         temp_path_speed = path_speed
         temp_path_position = path_position
+        temp_previous_path_id = movement_path
         path_end()
         movement_path = ds_map_find_value(global.path_map_next,movement_path)
-        path_start(movement_path,temp_path_speed,2,true)
-        path_position = (temp_path_position + (path_speed/path_get_length(movement_path))) % 1
-        if (path_position > .5) // if you're too close to the end of the path, ie you didnt cross the end
-            path_position = 0   //  just go to the start
+        if(movement_path != obj_world.associated_path)
+        {
+            show_message("new path : " + string(movement_path))
+            show_message("world path : " + string(obj_world.associated_path))
+            path_start(movement_path,temp_path_speed,2,true)
+            path_position = (temp_path_position + (path_speed/path_get_length(movement_path))) % 1
+            if (path_position > .5) // if you're too close to the end of the path, ie you didnt cross the end
+                path_position = 0   //  just go to the start
         //show_message(path_position)
         
-        if (ds_map_find_value(global.path_map_climbable,movement_path))
-        {
-            movement_climbable_surface = 1
-            slide_check()
+            if (ds_map_find_value(global.path_map_climbable,movement_path))
+            {
+                movement_climbable_surface = 1
+                slide_check()
+            }
+            else
+            {   
+                movement_currently_climbing = 0
+                movement_climbable_surface = 0
+            
+                slide_check()
+            }
         }
         else
-        {  
-            movement_currently_climbing = 0
-            movement_climbable_surface = 0
-            
-            slide_check()
+        {
+            show_message("go to world")
+            make_player_world_path(1) // else you are on the world
         }
         
         return 1

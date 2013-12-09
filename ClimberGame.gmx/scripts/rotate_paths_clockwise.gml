@@ -43,11 +43,19 @@ for (i = 0 ; i < ds_list_size(global.path_list) ; i++)
     {
         pre_x = path_get_point_x(change_path,j) - obj_world_initialize_god.world_center_x
         pre_y = path_get_point_y(change_path,j) - obj_world_initialize_god.world_center_y //  treat rot_god center like an offset
-        pre_cos = ROT_COS//cos(ROTATION_SPEED*2*pi/360)
-        pre_sin = ROT_SIN//sin(ROTATION_SPEED*2*pi/360)
-        path_change_point(ds_list_find_value(global.path_list,i),j,pre_x*pre_cos - pre_y*(pre_sin) + obj_world_initialize_god.world_center_x,pre_x*(pre_sin) + pre_y*pre_cos + obj_world_initialize_god.world_center_y,100)
+      //  pre_cos = ROT_COS//cos(ROTATION_SPEED*2*pi/360)
+    //    pre_sin = ROT_SIN//sin(ROTATION_SPEED*2*pi/360)
+        path_change_point(ds_list_find_value(global.path_list,i),j,pre_x*ROT_COS - pre_y*ROT_SIN + obj_world_initialize_god.world_center_x,pre_x*ROT_SIN + pre_y*ROT_COS + obj_world_initialize_god.world_center_y,100)
     }
     //path_rotate(global.path_list[i],ROTATION_SPEED)
+}
+
+for(i = 0 ; i < ds_list_size(global.world_adjacency_path_list) ; i++) // modify adjacency path list
+{
+    pre_x = ds_list_find_value(ds_list_find_value(global.world_adjacency_path_list,i),0) - obj_world_initialize_god.world_center_x
+    pre_y = ds_list_find_value(ds_list_find_value(global.world_adjacency_path_list,i),1) - obj_world_initialize_god.world_center_y
+    ds_list_replace(ds_list_find_value(global.world_adjacency_path_list,i),0,pre_x*ROT_COS - pre_y*ROT_SIN + obj_world_initialize_god.world_center_x)
+    ds_list_replace(ds_list_find_value(global.world_adjacency_path_list,i),1,pre_x*ROT_SIN + pre_y*ROT_COS + obj_world_initialize_god.world_center_y)    
 }
 
 with(obj_block_parent)

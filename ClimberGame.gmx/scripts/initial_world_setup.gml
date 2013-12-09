@@ -7,7 +7,15 @@ global.path_destroy_list = ds_list_create()
 global.world_adjacency_path_list = ds_list_create()
 
 with(obj_world)
-    event_perform(ev_other,ev_room_start)
+{
+    associated_path = path_add()
+    path_add_point(associated_path,x,y,100)
+    path_add_point(associated_path,x,y,100)
+    path_add_point(associated_path,x,y,100)
+    parent_block_list = -1 // set this to a null value so that it cannot be destroyed. TEMPORARY
+}
+
+global.world_adjacency_path_list_current_index = 0
 
 //current_check_x = ds_list_find_value(ds_list_find_value(global.world_list,0),0)
 

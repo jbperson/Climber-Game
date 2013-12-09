@@ -25,11 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>associated_path = path_add()
-path_add_point(associated_path,x,y,100)
-path_add_point(associated_path,x,y,100)
-path_add_point(associated_path,x,y,100)
-parent_block_list = -1 // set this to a null value so that it cannot be destroyed. TEMPORARY
+            <string>//if(!path_exists(associated_path))
+{
+
+}
 </string>
           </argument>
         </arguments>
