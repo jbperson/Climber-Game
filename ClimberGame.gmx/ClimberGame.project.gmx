@@ -83,6 +83,8 @@
       <script>scripts\move_along_path.gml</script>
       <script>scripts\change_key_check.gml</script>
       <script>scripts\change_paths_check.gml</script>
+      <script>scripts\set_current_world_adjacency_path_list_index.gml</script>
+      <script>scripts\make_player_world_path.gml</script>
     </scripts>
     <scripts name="World Setup">
       <script>scripts\add_next_path_point_to_list.gml</script>
@@ -114,12 +116,11 @@
     <script>scripts\rotate_paths_clockwise.gml</script>
     <script>scripts\rotate_paths_counterclockwise.gml</script>
     <script>scripts\rotate_world.gml</script>
-    <script>scripts\make_player_world_path.gml</script>
     <script>scripts\quadratic_root_1.gml</script>
     <script>scripts\quadratic_root_2.gml</script>
     <script>scripts\change_path_world_collision.gml</script>
-    <script>scripts\set_current_world_adjacency_path_list_index.gml</script>
     <script>scripts\TEST_check_world_adjacency_list.gml</script>
+    <script>scripts\script44.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>

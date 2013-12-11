@@ -8,17 +8,17 @@ if (!(temp_ground_direction < STEEPEST_WALKABLE_GRADE - 90 && temp_ground_direct
     {
         //show_message("sliding")
         //show_message(temp_ground_direction)
-        if (path_speed < .5 && movement_controlled)
+        if (path_move_speed < .5 && movement_controlled)
         {
             //show_message("pathspeed0")
             if (path_get_y(movement_path,(path_position + 1/path_get_length(movement_path))%1) < y)
             {
-                path_speed = -.5
+                path_move_speed = -.5
                 path_position -= .5/path_get_length(movement_path)
             }
             else
             {
-                path_speed = +.5
+                path_move_speed = +.5
                 path_position += .5/path_get_length(movement_path)
             }
         }

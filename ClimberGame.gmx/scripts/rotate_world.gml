@@ -25,7 +25,7 @@ if(keyboard_check(ord('A')))
 
     build_new_platforms_right_check()
 }
-with(obj_player)
+/*with(obj_player)
 {
     if(changed_paths)
     {
@@ -44,4 +44,4 @@ with(obj_player)
         
     //    show_message("POS: " + string(x) + "," + string(y))
     }
-}
+}*/

@@ -6,50 +6,50 @@ if (!keyboard_check(held_key))
 {
     if (keyboard_check(vk_left))
     {        
-        path_speed = -(h_right_is_forward)
+        path_move_speed = -(h_right_is_forward)
 
         if (keyboard_check(vk_space) && jump_timer == 0 && !movement_currently_climbing)
-            path_speed *= 5 //  move faster if running
+            path_move_speed *= 5 //  move faster if running
         else
-            path_speed *= 3 //  move normally
+            path_move_speed *= 3 //  move normally
     }
     if (keyboard_check(vk_right))
     {
-        path_speed = (h_right_is_forward)
+        path_move_speed = (h_right_is_forward)
 
         if (keyboard_check(vk_space) && jump_timer == 0 && !movement_currently_climbing)
-            path_speed *= 5
+            path_move_speed *= 5
         else
-            path_speed *= 3
+            path_move_speed *= 3
     }
     if (keyboard_check(vk_down))
     {        
-        path_speed = -(v_up_is_forward)
+        path_move_speed = -(v_up_is_forward)
 
         if (keyboard_check(vk_space) && jump_timer == 0 && !movement_currently_climbing)
-            path_speed *= 5 //  move faster if running
+            path_move_speed *= 5 //  move faster if running
         else
-            path_speed *= 3 //  move normally
+            path_move_speed *= 3 //  move normally
     }
     if (keyboard_check(vk_up))
     {
-        path_speed = (v_up_is_forward)
+        path_move_speed = (v_up_is_forward)
 
         if (keyboard_check(vk_space) && jump_timer == 0 && !movement_currently_climbing)
-            path_speed *= 5
+            path_move_speed *= 5
         else
-            path_speed *= 3
+            path_move_speed *= 3
     }
 }   //  if held key is being pressed, continue motion. otherwise, do normal motion checks
-else if (abs(path_speed) == 3 && keyboard_check(vk_space) && jump_timer == 0 && !movement_currently_climbing)
-    path_speed *= 5/3   //  if you are using the held key and running
+else if (abs(path_move_speed) == 3 && keyboard_check(vk_space) && jump_timer == 0 && !movement_currently_climbing)
+    path_move_speed *= 5/3   //  if you are using the held key and running
     
 // AFTER
     
 if (!(keyboard_check(vk_up) || keyboard_check(vk_down) || keyboard_check(vk_right) || keyboard_check(vk_left)) || changed_paths) // if no arrows are being pressed
 {
-    changed_paths_temp_speed = path_speed
-    path_speed = 0
+    changed_paths_temp_speed = path_move_speed
+    path_move_speed = 0
 }
 
 // BEFORE

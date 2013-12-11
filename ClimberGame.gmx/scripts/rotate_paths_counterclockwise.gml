@@ -75,10 +75,13 @@ with(obj_player)
     {
         image_angle += ROTATION_SPEED
         temp_position = path_position
-        temp_speed = path_speed
         path_end()
-        path_start(movement_path,temp_speed,2,true)
+        path_start(movement_path,0,2,true)
         path_position = temp_position
+        if(keyboard_check(vk_right))
+            path_position -= 3/path_get_length(movement_path)
+        if(keyboard_check(vk_left))
+            path_position += 3/path_get_length(movement_path)
     }
     else if (movement_locked) // else you're on the world
     {

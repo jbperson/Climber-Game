@@ -3,7 +3,7 @@
 if (movement_locked)
 {
 
-    if (path_speed != 0)
+    if (path_move_speed != 0)
         image_angle = direction
         
     if (movement_path == obj_world.associated_path && abs(direction - previous_direction) <= 10)
@@ -46,16 +46,16 @@ if (movement_locked)
         
         //show_message(get_direction_perpendicular_to_ground())
     
-        if (path_speed > 0 )
-            path_speed += G_FORCE
-        else if (path_speed < 0)
-            path_speed -= G_FORCE
-        else if (path_speed == 0)
+        if (path_move_speed > 0 )
+            path_move_speed += G_FORCE
+        else if (path_move_speed < 0)
+            path_move_speed -= G_FORCE
+        else if (path_move_speed == 0)
         {
             if(direction%180 < 90)
-                path_speed -= G_FORCE * h_right_is_forward
+                path_move_speed -= G_FORCE * h_right_is_forward
             if(direction%180 > 90)
-                path_speed += G_FORCE * h_right_is_forward
+                path_move_speed += G_FORCE * h_right_is_forward
         }
             
     }
@@ -90,7 +90,7 @@ else //else movement is unlocked
             //show_message(point_distance(obj_world.x,obj_world.y,x,y))
             show_message("on world")
             make_player_world_path(1)
-            path_speed = 0
+            path_move_speed = 0
             set_current_world_adjacency_path_list_index() // sets the ccurrent world adjacency path list index to the proper place in the list
         }
         else
@@ -101,7 +101,7 @@ else //else movement is unlocked
            // show_message(new_path_point_x)
            // show_message(new_path_point_y) 
             
-            path_start(movement_path,.01,2,true)
+            path_start(movement_path,0,2,true)
             
             x = new_path_point_x
             y = new_path_point_y  
@@ -132,4 +132,6 @@ else //else movement is unlocked
 
 // Change previous direction variable
 previous_direction = direction
-previous_path_speed = path_speed
+previous_path_move_speed = path_move_speed
+
+path_position += path_move_speed / path_get_length(movement_path)

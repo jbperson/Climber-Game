@@ -75,9 +75,8 @@ with(obj_player)
     {
         image_angle -= ROTATION_SPEED
         temp_position = path_position
-        temp_speed = path_speed
         path_end()
-        path_start(movement_path,temp_speed,2,true)
+        path_start(movement_path,0,2,true)
         path_position = temp_position
     }
     else if (movement_locked)

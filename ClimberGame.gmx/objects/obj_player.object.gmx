@@ -25,6 +25,71 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>if(path_speed != 0)
+    show_message("Speeed : " + string(path_speed))
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(tomohawk)
+{
+//    show_message("prerotTOMA")
+  //  show_message("toma path pos " + string(path_position))
+    //show_message("toma pos: " + string(x) + "," + string(y))
+}
+
+rotate_world()
+
+if (movement_path == obj_world.associated_path &amp;&amp; movement_locked)
+    make_player_world_path(1)
+    
+if(tomohawk)
+{
+  //  show_message("TOMA")
+//    show_message("toma path pos " + string(path_position))
+  //  show_message("toma pos: " + string(x) + "," + string(y))
+    tomohawk = 0
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>if(changed_paths)
 {
      //   show_message("yup")
@@ -80,47 +145,6 @@ if(ccc)
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(tomohawk)
-{
-//    show_message("prerotTOMA")
-  //  show_message("toma path pos " + string(path_position))
-    //show_message("toma pos: " + string(x) + "," + string(y))
-}
-
-rotate_world()
-
-if (movement_path == obj_world.associated_path &amp;&amp; movement_locked)
-    make_player_world_path(1)
-    
-if(tomohawk)
-{
-  //  show_message("TOMA")
-//    show_message("toma path pos " + string(path_position))
-  //  show_message("toma pos: " + string(x) + "," + string(y))
-    tomohawk = 0
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="4">
       <action>
         <libid>1</libid>
@@ -145,6 +169,7 @@ movement_controlled = true // Signifies that the player can control their moveme
 movement_climbable_surface = false // When true, signifies that the player is on a climbable slope.
 movement_currently_climbing = false //  when true, signifies that the player is on a slope that would not be walkable, but is climbable
 movement_path = obj_world.associated_path//test_path_1 // sets starting movement path
+path_move_speed = 0 // use this to tell us how much we want to move during the update step. We don't use the built in path speed to avoid teleportation glitches
 changed_paths = false
 ccc = false
 tomohawk = 0;

@@ -9,7 +9,7 @@
     else
         world_path_length = 3*/
     
-    storePathSpeed = path_speed
+    storePathSpeed = path_move_speed
     
     path_end()
         
@@ -34,7 +34,7 @@
         y = should_be_y
         
         movement_path = obj_world.associated_path
-        path_start(obj_world.associated_path,storePathSpeed,2,true)
+        path_start(obj_world.associated_path,0,2,true)
     
         path_position = .25
     }
