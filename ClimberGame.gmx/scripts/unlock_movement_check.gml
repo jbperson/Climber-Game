@@ -1,26 +1,16 @@
-// Checks if there is a collision with a walkable block below the player. If not, unlock player movement.
-// Uses a buffer room of 8 for seeing if to start falling
-
-/*if (!(collision_line(x-16,y-16,x-16,y-24  ,obj_block_parent,true,true)  ||
-    collision_line(x-16,y+16,x-16,y+8   ,obj_block_parent,true,true)  ||
-    collision_line(x+16,y-16,x+16,y-24  ,obj_block_parent,true,true)  ||
-    collision_line(x+16,y+16,x+16,y+8   ,obj_block_parent,true,true)    )) */
+// By using the standardized directionality of paths (that is, all floors go from right to left and ceilings to left to right, etc), this function unlocks
+// player movement if the player is on an upside down portion of the path
 
 temp_ground_direction = get_direction_perpendicular_to_ground()
 
     //  --> previous condition : "!place_meeting(x,y+8,obj_block_parent)"
 if ( temp_ground_direction >= 180 && temp_ground_direction <= 360 && !movement_climbable_surface)
 {
-  //  show_message("before tmp: " + string(movement_path))
-  //  show_message("temp ground direction: " + string(temp_ground_direction))
-  //  show_message("tempground:")
-    //show_message(temp_ground_direction)
-    //show_message("direction")
-    //show_message(direction)
-    path_position -= path_speed/path_get_length(movement_path)
-    //show_message("unlocking")
+
+    path_position -= path_move_speed/path_get_length(movement_path) // return to previous position in case you just rounded a corner; ie you slid off a ledge with a turn into a ceiling
+
     movement_locked = false
-    tempspeed = abs(path_speed)
+    tempspeed = abs(path_move_speed)
     tempdirection = previous_direction   //  store speed and direction to reset it. Use previous direction in case you just walked off of a cliff
     path_end()
     

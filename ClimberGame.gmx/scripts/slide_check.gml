@@ -2,7 +2,7 @@
 
 temp_ground_direction = get_direction_perpendicular_to_ground()
 
-if (!(temp_ground_direction < STEEPEST_WALKABLE_GRADE - 90 && temp_ground_direction > STEEPEST_WALKABLE_GRADE - 210))
+if (!(temp_ground_direction < STEEPEST_WALKABLE_GRADE - 90 && temp_ground_direction > STEEPEST_WALKABLE_GRADE - 210)) // if this slope is not walkable
 {
     if (!movement_climbable_surface)
     {
@@ -22,7 +22,7 @@ if (!(temp_ground_direction < STEEPEST_WALKABLE_GRADE - 90 && temp_ground_direct
                 path_position += .5/path_get_length(movement_path)
             }
         }
-        movement_controlled = false // unlock player movement if not on a climbable slope
+        movement_controlled = false // slide player movement if not on a climbable slope
     }
     else
         movement_currently_climbing = true  //  else, player is currently climbing

@@ -1,13 +1,4 @@
 // This path alters the world path. Argument 0 specifies whether to start the path or not
-
- 
-    /*if(jump_timer == 0 && keyboard_check(vk_space))
-    {
-        //show_message("pow")
-        world_path_length = 5
-    }
-    else
-        world_path_length = 3*/
     
     storePathSpeed = path_move_speed
     

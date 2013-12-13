@@ -1,23 +1,23 @@
 // If the player needs to autojump, will cause the player to autojump. Returns TRUE if the player has jumped, and FALSE if the player has not
 
-if (direction != previous_direction)
-{
+check_value_signed = get_path_direction() - point_direction(path_get_x(movement_path,path_position),path_get_y(movement_path,path_position),path_get_x(movement_path,path_position + path_move_speed/path_get_length(movement_path)),path_get_y(movement_path,path_position + path_move_speed/path_get_length(movement_path)))
+check_value = abs(check_value_signed)
 
-    if (abs((direction % 180) - (previous_direction % 180)) > 5 && keyboard_check(vk_space) && jump_timer != 7) //  if the player is holding spaces but didn't just jump and didn't just turn around
+if(path_move_speed != 0 && check_value > .1 && abs(check_value - 180) > .1) // If we turned but didn't just turn around
+{
+ //   show_message("triggered")   
+    if (keyboard_check(vk_space) && !movement_currently_climbing) //  if the player is holding space
     {
-        if (keyboard_check(vk_right) && (((direction + 90) % 360) < ((previous_direction + 90) % 360)))
+        if ((keyboard_check(vk_right) && check_value_signed > 0) || (keyboard_check(vk_left) && check_value_signed < 0)) // if holding right and over a convex edge
         {
-            //show_message("right")
+    //        show_message("jump")
             movement_locked = false
-            tempspeed = abs(previous_path_speed)
-            tempdirection = previous_direction   //  store speed and direction to reset it
+            tempspeed = abs(path_move_speed)
+            tempdirection = get_path_direction()   //  store speed and direction to reset it
             path_end()
             
             speed = tempspeed
             direction = tempdirection
-            
-            x = xprevious
-            y = yprevious
             
             vspeed -= 5
             
@@ -29,35 +29,8 @@ if (direction != previous_direction)
             
             held_key = 0    //  turn off held key
             
-            return true
+            return true 
         } // For right-sided auto jump
-        
-        if (keyboard_check(vk_left) && (((direction) % 360) > ((previous_direction) % 360)))
-        {
-            //show_message("left")
-            movement_locked = false
-            tempspeed = abs(previous_path_speed)
-            tempdirection = previous_direction   //  store speed and direction to reset it
-            path_end()
-            
-            speed = tempspeed
-            direction = tempdirection
-            
-            x = xprevious
-            y = yprevious
-            
-            vspeed -= 5
-            
-            x += hspeed
-            y += vspeed
-            
-            movement_climbable_surface = false
-            movement_currently_climbing = false //  stop climbing
-            
-            held_key = 0 // turn of held key
-            
-            return true
-        } // for left auto jump
     }
 }
 

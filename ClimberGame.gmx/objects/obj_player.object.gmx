@@ -90,26 +90,8 @@ if(tomohawk)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(changed_paths)
-{
-     //   show_message("yup")
-       // show_message("pos:  " + string(x) + "," + string(y))
-      //  show_message("Should be pos " + string(path_get_x(movement_path,path_position)) + "," + string(path_get_y(movement_path,path_position)))
-        //changed_paths = false
-        ccc = true
-        
-   /*     temp_pos = path_position
-        temp_speed = path_speed
-        path_end()
-        x = path_get_x(movement_path,path_position)
-        y = path_get_y(movement_path,path_position)
-        path_start(movement_path,path_speed,2,true)
-        path_position = temp_pos */
-}
-
-
-move_player() // Moves the player due to their own control.
-
+            <string>move_player() // Moves the player due to their own control.
+ /*
 if(ccc)
 {
 
@@ -139,7 +121,7 @@ if(ccc)
         
         tomohawk = 1; 
 
-}
+} */
 </string>
           </argument>
         </arguments>
@@ -235,14 +217,14 @@ previous_direction = 0
             <string>//TEST_check_world_adjacency_list()
 //show_message("Position:  " + string(x) + ", " + string(y))
 //show_message("World path : " + string(obj_world.associated_path))
-show_message("prev map size: " + string(ds_map_size(global.path_map_prev)))
+show_message("next map size: " + string(ds_map_size(global.path_map_next)))
 
-tempkey = ds_map_find_first(global.path_map_prev)
-    show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_prev,tempkey)))
-while(tempkey != ds_map_find_last(global.path_map_prev))
+tempkey = ds_map_find_first(global.path_map_next)
+    show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_next,tempkey)))
+while(tempkey != ds_map_find_last(global.path_map_next))
 {
-        tempkey = ds_map_find_next(global.path_map_prev,tempkey)
-    show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_prev,tempkey)))
+        tempkey = ds_map_find_next(global.path_map_next,tempkey)
+    show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_next,tempkey)))
 }
 </string>
           </argument>

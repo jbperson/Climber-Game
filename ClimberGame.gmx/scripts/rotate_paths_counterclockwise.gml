@@ -1,40 +1,5 @@
 // This  script rotates all the paths around the rot_god in a clockwise direction.
 
-/*with(obj_player)
-{
-    if(movement_locked)
-    {
-        image_angle += ROTATION_SPEED
-        dir = point_direction(obj_rot_god.x,obj_rot_god.y,x,y)
-        dist = point_distance(obj_rot_god.x,obj_rot_god.y,x,y)
-        dir += ROTATION_SPEED
-        x = obj_rot_god.x + lengthdir_x(dist,dir)
-        y = obj_rot_god.y + lengthdir_y(dist,dir)
-    }
-}*/
-
-/*for(i = 0 ; i < global.path_list_count ; i++)
-{
-    for(j = 0 ; j < path_get_number(global.path_list[i]) ; j++)
-    {
-        x_point = path_get_point_x(global.path_list[i],j)
-        y_point = path_get_point_y(global.path_list[i],j)
-        dist = point_distance(obj_rot_god.x,obj_rot_god.y,x_point,y_point)
-        dir = point_direction(obj_rot_god.x,obj_rot_god.y,x_point,y_point) + ROTATION_SPEED
-        path_change_point(global.path_list[i],j,obj_rot_god.x + lengthdir_x(dist,dir),obj_rot_god.y + lengthdir_y(dist,dir),100)
-    }
-}
-
-with(obj_block_parent)
-{
-    image_angle += ROTATION_SPEED
-    dir = point_direction(obj_rot_god.x,obj_rot_god.y,x,y)
-    dist = point_distance(obj_rot_god.x,obj_rot_god.y,x,y)
-    dir += ROTATION_SPEED
-    x = obj_rot_god.x + lengthdir_x(dist,dir)
-    y = obj_rot_god.y + lengthdir_y(dist,dir)
-}*/
-
 for (i = 0 ; i < ds_list_size(global.path_list) ; i++)
 {
     change_path = ds_list_find_value(global.path_list,i)
@@ -48,7 +13,7 @@ for (i = 0 ; i < ds_list_size(global.path_list) ; i++)
         path_change_point(ds_list_find_value(global.path_list,i),j,pre_x*ROT_COS - pre_y*-ROT_SIN + obj_world_initialize_god.world_center_x,pre_x*-ROT_SIN + pre_y*ROT_COS + obj_world_initialize_god.world_center_y,100)
     }
     //path_rotate(global.path_list[i],ROTATION_SPEED)
-}
+} // rotate all paths
 
 for(i = 0 ; i < ds_list_size(global.world_adjacency_path_list) ; i++) // modify adjacency path list
 {

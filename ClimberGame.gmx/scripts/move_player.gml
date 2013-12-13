@@ -6,10 +6,11 @@ if (movement_locked)
     if (path_move_speed != 0)
         image_angle = direction
         
+    // This is a temp fix until auto jump is handled better - makes sure you don't jump off of the face of the earth for no reason    
     if (movement_path == obj_world.associated_path && abs(direction - previous_direction) <= 10)
         previous_direction = direction
 
-    if (movement_controlled && !auto_jump_check())
+    if (movement_controlled) // used to contain  && !auto_jump_check()
     {           
     // Regulates Jumping
         if (keyboard_check_pressed(vk_space))
@@ -20,31 +21,19 @@ if (movement_locked)
         {
             jump_player()
         }
-        
-         
-        /*if(jump_timer == 0 && keyboard_check(vk_space))
-        {
-            //show_message("pow")
-            world_path_length = 5
-        }
-        else
-            world_path_length = 3*/
             
         if (movement_locked)
-            if (!move_along_path())   // IN HERE
+        {
+            if (!move_along_path())   // Set path_move_speed based on current keyboard input. We don't actually update the path position until the end of this script
             {
-
                 slide_check()   // if the player did not switch paths, do the slide check.
             }
-           // else
-         //       show_message("NEW move path : " + string(movement_path)
-
+            auto_jump_check() // after setting the move speed, check to see if we would auto jump in next step
+        }
     }
     else    //  else player is sliding
     {
         slide_check()
-        
-        //show_message(get_direction_perpendicular_to_ground())
     
         if (path_move_speed > 0 )
             path_move_speed += G_FORCE
@@ -59,8 +48,6 @@ if (movement_locked)
         }
             
     }
-
-    // BEFORE
     
     if (movement_locked)    //  need to check this after doing auto jump check
     {
@@ -73,7 +60,6 @@ if (movement_locked)
 }
 else //else movement is unlocked
 {
-    //show_message("unlocked step")
     
     if (vspeed < MAX_FALL_SPEED) //  fall down
     {
@@ -87,8 +73,6 @@ else //else movement is unlocked
     if (temp_block_collided != noone && (temp_block_collided.object_index != obj_world || point_distance(obj_world.x,obj_world.y,x,y) <= WORLD_RADIUS + 16))
     {   
         if (temp_block_collided.object_index == obj_world){
-            //show_message(point_distance(obj_world.x,obj_world.y,x,y))
-            show_message("on world")
             make_player_world_path(1)
             path_move_speed = 0
             set_current_world_adjacency_path_list_index() // sets the ccurrent world adjacency path list index to the proper place in the list
@@ -97,9 +81,6 @@ else //else movement is unlocked
         {
             find_nearest_path_position(temp_block_collided.associated_path)
             movement_path = temp_block_collided.associated_path
-           
-           // show_message(new_path_point_x)
-           // show_message(new_path_point_y) 
             
             path_start(movement_path,0,2,true)
             
@@ -121,7 +102,6 @@ else //else movement is unlocked
         slide_check()
         if (movement_controlled)
         {
-            //show_message("being controlled")
             speed = 0
         }
         
@@ -131,7 +111,10 @@ else //else movement is unlocked
 }   //  if unlocked
 
 // Change previous direction variable
-previous_direction = direction
+if(movement_locked)
+    previous_direction = get_path_direction()
+else
+ previous_direction = direction
 previous_path_move_speed = path_move_speed
 
 path_position += path_move_speed / path_get_length(movement_path)

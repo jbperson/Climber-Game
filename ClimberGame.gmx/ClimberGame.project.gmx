@@ -85,6 +85,7 @@
       <script>scripts\change_paths_check.gml</script>
       <script>scripts\set_current_world_adjacency_path_list_index.gml</script>
       <script>scripts\make_player_world_path.gml</script>
+      <script>scripts\get_path_direction.gml</script>
     </scripts>
     <scripts name="World Setup">
       <script>scripts\add_next_path_point_to_list.gml</script>
@@ -107,6 +108,7 @@
       <script>scripts\TEST_rotate_world.gml</script>
       <script>scripts\destroy_n_paths_from_start_of_path_list.gml</script>
       <script>scripts\destroy_n_paths_from_end_of_path_list.gml</script>
+      <script>scripts\change_path_world_collision.gml</script>
     </scripts>
     <script>scripts\get_line_y.gml</script>
     <script>scripts\get_line_y_point_slope.gml</script>
@@ -118,10 +120,10 @@
     <script>scripts\rotate_world.gml</script>
     <script>scripts\quadratic_root_1.gml</script>
     <script>scripts\quadratic_root_2.gml</script>
-    <script>scripts\change_path_world_collision.gml</script>
     <script>scripts\TEST_check_world_adjacency_list.gml</script>
-    <script>scripts\script44.gml</script>
+    <script>scripts\replace_paths_in_maps.gml</script>
   </scripts>
+  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_block_test</object>
