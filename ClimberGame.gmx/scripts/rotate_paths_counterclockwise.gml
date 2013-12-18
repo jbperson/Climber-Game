@@ -34,6 +34,17 @@ with(obj_block_parent)
     y = pre_x*pre_sin + pre_y*pre_cos + obj_world_initialize_god.world_center_y
 }
 
+with(obj_bad_block_parent)
+{
+    image_angle += ROTATION_SPEED
+    pre_x = x - obj_world_initialize_god.world_center_x
+    pre_y = y - obj_world_initialize_god.world_center_y //  treat rot_god center like an offset
+    pre_cos = ROT_COS//cos(ROTATION_SPEED*2*pi/360)
+    pre_sin = -ROT_SIN//sin(ROTATION_SPEED*2*pi/360)
+    x = pre_x*pre_cos - pre_y*pre_sin + obj_world_initialize_god.world_center_x
+    y = pre_x*pre_sin + pre_y*pre_cos + obj_world_initialize_god.world_center_y
+}
+
 with(obj_player)
 {
     if(movement_locked && movement_path != obj_world.associated_path)

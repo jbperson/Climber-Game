@@ -1,26 +1,27 @@
 // This function takes a list as argument0, a zone ID as argument1, and adds its own data to that list (object_index, x relative to zone, y relative to zone). It then calls the
 // function for the next block in the path.
 
-//show_message("called")
-
 list_to_add_to = argument0
 
 zone_x = argument1.x
-zone_y = argument1.y
+zone_y = argument1.y  // the zone coordinates
 
-ds_list_add(list_to_add_to,self.object_index)
-ds_list_add(list_to_add_to,x - zone_x)
-ds_list_add(list_to_add_to,y - zone_y)
+ds_list_add(list_to_add_to,self.object_index)           //  add your obj index to save the type of block to make
+ds_list_add(list_to_add_to,x - zone_x)                  //  the coordinates of block in relation to the zone
+ds_list_add(list_to_add_to,y - zone_y)      
 
 placed_into_path = true
+
+if(object_is_ancestor(self.object_index,obj_block_path_point_end_parent)) // if this is an end block
+    exit
 
 test_x = x
 test_y = y
 
 test_next_block = collision_point(test_x,test_y,obj_block_path_point_parent,false,true)
-test_next_block_climb = collision_point(test_x,test_y,obj_block_path_point_climb_parent,false,true)
+test_next_block_climb = collision_point(test_x,test_y,obj_block_path_point_climb_parent,false,true)        
 
-while (test_next_block == noone && test_next_block_climb == noone)
+while (test_next_block == noone && test_next_block_climb == noone)      //  until we fin next block
 {
 
     test_x += lengthdir_x(16,next_path_point_direction)
@@ -36,7 +37,7 @@ while (test_next_block == noone && test_next_block_climb == noone)
 }
 
 global.temp_list = list_to_add_to
-global.temp_zone_id = argument1
+global.temp_zone_id = argument1         
 
 if test_next_block == noone
     test_next_block = test_next_block_climb

@@ -78,6 +78,13 @@ with(collision_point(x,y,obj_block_path_point_climb_parent,false,true))
     ds_map_add(global.path_map_climbable,associated_path,1) //  if there is a climbing path, add it to the climbable path map
 }
 
+with(collision_point(x,y,obj_bad_block_parent,false,true))
+{
+    placed_into_path = true
+    event_perform(ev_other,ev_user1)
+    make_bad_blocks()
+}
+
 instance_destroy()
 </string>
           </argument>

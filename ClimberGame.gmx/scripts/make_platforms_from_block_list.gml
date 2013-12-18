@@ -8,8 +8,6 @@ make_zone_y = argument2
 zone_orientation_dir = 90 + ((180*(obj_world_initialize_god.current_world_x - make_zone_x)) / (pi * WORLD_RADIUS)) // get direction pointing towards zone center
 zone_center_dist = WORLD_RADIUS + (obj_world_initialize_god.current_world_y - make_zone_y)
 
-//show_message("Zone orientation: " + string(zone_orientation_dir)+"and dist: "+string(zone_center_dist))
-
 // Make path starter obj at first instance in block
 make_block_index = 0
 

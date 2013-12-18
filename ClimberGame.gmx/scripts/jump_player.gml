@@ -14,7 +14,7 @@ if (!movement_currently_climbing && jump_timer > 0)
     path_end()
     speed = tempspeed
     direction = tempdirection   
-    show_message("Dir : " + string(tempdirection))
+  //  show_message("Dir : " + string(tempdirection))
 
     vspeed -= 4
     y -= 4

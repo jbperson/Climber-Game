@@ -38,6 +38,15 @@
       <sprite>sprites\spr_block_path_point_WtC_UR</sprite>
       <sprite>sprites\spr_block_path_point_WtC_DR</sprite>
       <sprite>sprites\spr_block_path_point_WtC_DL</sprite>
+      <sprite>sprites\spr_block_path_point_end_UL</sprite>
+      <sprite>sprites\spr_block_path_point_end_UR</sprite>
+      <sprite>sprites\spr_block_path_point_end_DR</sprite>
+      <sprite>sprites\spr_block_path_point_end_DL</sprite>
+      <sprite>sprites\spr_bad_block</sprite>
+      <sprite>sprites\spr_bad_block_left</sprite>
+      <sprite>sprites\spr_bad_block_up</sprite>
+      <sprite>sprites\spr_bad_block_right</sprite>
+      <sprite>sprites\spr_bad_block_down</sprite>
     </sprites>
     <sprite>sprites\spr_block_path_point_up</sprite>
     <sprite>sprites\spr_block_path_point_down</sprite>
@@ -89,6 +98,7 @@
     </scripts>
     <scripts name="World Setup">
       <script>scripts\add_next_path_point_to_list.gml</script>
+      <script>scripts\add_next_bad_block_to_list.gml</script>
       <script>scripts\add_block_to_zone_list.gml</script>
       <script>scripts\add_zone_lists_to_world_list.gml</script>
       <script>scripts\TEST_create_blocks_from_lists.gml</script>
@@ -100,6 +110,7 @@
       <script>scripts\make_block_lists_from_zone_list.gml</script>
       <script>scripts\make_platforms_from_block_list.gml</script>
       <script>scripts\path_maps_create.gml</script>
+      <script>scripts\make_bad_blocks.gml</script>
     </scripts>
     <scripts name="World Management">
       <script>scripts\build_new_platforms_right_check.gml</script>
@@ -110,20 +121,22 @@
       <script>scripts\destroy_n_paths_from_end_of_path_list.gml</script>
       <script>scripts\change_path_world_collision.gml</script>
     </scripts>
+    <scripts name="World Rotation">
+      <script>scripts\rotate_world.gml</script>
+      <script>scripts\rotate_paths_clockwise.gml</script>
+      <script>scripts\rotate_paths_counterclockwise.gml</script>
+    </scripts>
     <script>scripts\get_line_y.gml</script>
     <script>scripts\get_line_y_point_slope.gml</script>
     <script>scripts\path_maps_create_test_lvl.gml</script>
     <script>scripts\path_maps_create_jo_lvl.gml</script>
     <script>scripts\get_segment_direction.gml</script>
-    <script>scripts\rotate_paths_clockwise.gml</script>
-    <script>scripts\rotate_paths_counterclockwise.gml</script>
-    <script>scripts\rotate_world.gml</script>
     <script>scripts\quadratic_root_1.gml</script>
     <script>scripts\quadratic_root_2.gml</script>
     <script>scripts\TEST_check_world_adjacency_list.gml</script>
     <script>scripts\replace_paths_in_maps.gml</script>
+    <script>scripts\hit_bad_block_from_walk.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_block_test</object>
@@ -142,17 +155,21 @@
     <object>objects\obj_climb_block_test_4</object>
     <object>objects\obj_climb_block_test_5</object>
     <object>objects\gtest</object>
-    <object>objects\obj_block_parent</object>
-    <object>objects\obj_climb_block_parent</object>
     <object>objects\object5</object>
     <object>objects\obj_path_god</object>
     <object>objects\obj_path_drawer</object>
     <object>objects\obj_path_god_test_lvl</object>
     <object>objects\obj_path_god_jo_lvl</object>
-    <object>objects\obj_block_path_point_parent</object>
-    <object>objects\obj_block_path_point_climb_parent</object>
-    <object>objects\obj_block_path_point_CtW_parent</object>
-    <object>objects\obj_block_path_point_WtC_parent</object>
+    <objects name="block parents">
+      <object>objects\obj_block_parent</object>
+      <object>objects\obj_climb_block_parent</object>
+      <object>objects\obj_block_path_point_parent</object>
+      <object>objects\obj_block_path_point_end_parent</object>
+      <object>objects\obj_block_path_point_climb_parent</object>
+      <object>objects\obj_block_path_point_CtW_parent</object>
+      <object>objects\obj_block_path_point_WtC_parent</object>
+      <object>objects\obj_bad_block_parent</object>
+    </objects>
     <object>objects\obj_block_path_point_CtW_UL</object>
     <object>objects\obj_block_path_point_CtW_UR</object>
     <object>objects\obj_block_path_point_CtW_DR</object>
@@ -177,6 +194,15 @@
     <object>objects\obj_block_path_point_UR_concave</object>
     <object>objects\obj_block_path_point_DR_concave</object>
     <object>objects\obj_block_path_point_DL_concave</object>
+    <object>objects\obj_block_path_point_end_UL</object>
+    <object>objects\obj_block_path_point_end_DL</object>
+    <object>objects\obj_block_path_point_end_DR</object>
+    <object>objects\obj_block_path_point_end_UR</object>
+    <object>objects\obj_bad_block</object>
+    <object>objects\obj_bad_block_up</object>
+    <object>objects\obj_bad_block_right</object>
+    <object>objects\obj_bad_block_down</object>
+    <object>objects\obj_bad_block_left</object>
     <object>objects\obj_path_starter</object>
     <object>objects\obj_test_zone</object>
     <object>objects\obj_zone_parent</object>
