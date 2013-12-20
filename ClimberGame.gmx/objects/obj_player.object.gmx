@@ -58,7 +58,7 @@
 
 rotate_world()
 
-if (movement_path == obj_world.associated_path &amp;&amp; movement_locked)
+if (movement_path == global.world_path &amp;&amp; movement_locked)
     make_player_world_path(1)
     
 if(tomohawk)
@@ -150,7 +150,7 @@ movement_locked = true // Signifies that the player is locked to a movement path
 movement_controlled = true // Signifies that the player can control their movement - off when sliding, for example
 movement_climbable_surface = false // When true, signifies that the player is on a climbable slope.
 movement_currently_climbing = false //  when true, signifies that the player is on a slope that would not be walkable, but is climbable
-movement_path = obj_world.associated_path//test_path_1 // sets starting movement path
+movement_path = global.world_path // sets starting movement path
 path_move_speed = 0 // use this to tell us how much we want to move during the update step. We don't use the built in path speed to avoid teleportation glitches
 changed_paths = false
 ccc = false

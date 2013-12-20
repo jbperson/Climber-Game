@@ -54,7 +54,7 @@
     event_perform(ev_other,ev_user1) // user event 1 will assign the associated_point_x, associated_point_y, and next_path_point_direction        
     
     path_add_point(associated_path,associated_point_x,associated_point_y,100)
-    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) == noone)
+    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone)
     change_path_world_collision(associated_path,path_get_number(associated_path)-2,0) // get second to last point, and it was not outside the world
     
     placed_into_path = true

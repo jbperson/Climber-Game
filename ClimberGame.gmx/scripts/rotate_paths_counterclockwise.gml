@@ -47,7 +47,7 @@ with(obj_bad_block_parent)
 
 with(obj_player)
 {
-    if(movement_locked && movement_path != obj_world.associated_path)
+    if(movement_locked && movement_path != global.world_path)
     {
         image_angle += ROTATION_SPEED
         temp_position = path_position

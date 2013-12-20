@@ -1,7 +1,7 @@
 // This function decides whether the player should go from one path to an adjacent path and then does that switch if needed.
 // This function returns 0 if no switch happened and 1 if it did.
 
-if( !path_get_closed(movement_path) && movement_path != obj_world.associated_path)
+if( !path_get_closed(movement_path) && movement_path != global.world_path)
 {
     if ( (path_position + (path_move_speed/path_get_length(movement_path)) <= 0) && ds_map_find_value(global.path_map_prev,movement_path) != -1 )
     {
@@ -9,7 +9,7 @@ if( !path_get_closed(movement_path) && movement_path != obj_world.associated_pat
         temp_path_position = path_position
         path_end()
         movement_path = ds_map_find_value(global.path_map_prev,movement_path)
-        if(movement_path != obj_world.associated_path) // if you weren't moved onto the world 
+        if(movement_path != global.world_path) // if you weren't moved onto the world 
         {
             path_start(movement_path,0,2,true)
             path_position = ( (temp_path_position + (temp_path_move_speed/path_get_length(movement_path))) ) % 1
@@ -44,7 +44,7 @@ if( !path_get_closed(movement_path) && movement_path != obj_world.associated_pat
         path_end()
         movement_path = ds_map_find_value(global.path_map_next,movement_path)
 
-        if(movement_path != obj_world.associated_path) // if we're not moving onto the world now
+        if(movement_path != global.world_path) // if we're not moving onto the world now
         {
             path_start(movement_path,0,2,true)
             path_position = (temp_path_position + (path_move_speed/path_get_length(movement_path))) % 1
@@ -77,7 +77,7 @@ if( !path_get_closed(movement_path) && movement_path != obj_world.associated_pat
         return 1
     }
 }
-else if(movement_path == obj_world.associated_path) // else we are currently on the world
+else if(movement_path == global.world_path) // else we are currently on the world
 {
     //show_message(point_distance(x,y,ds_list_find_value(ds_list_find_value(global.world_adjacency_path_list,global.world_adjacency_path_list_current_index),0),ds_list_find_value(ds_list_find_value(global.world_adjacency_path_list,global.world_adjacency_path_list_current_index),1))) // if you'll be on the path in the next step
     

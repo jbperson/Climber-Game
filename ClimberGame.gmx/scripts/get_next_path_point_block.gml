@@ -46,7 +46,7 @@ ds_stack_destroy(make_stack)
 
 global.temp_associated_path = associated_path
 global.temp_parent_block_list = parent_block_list
-if (collision_point(x,y,obj_world,true,true) != noone)
+if (collision_point(x,y,obj_world_parent,true,true) != noone)
     global.temp_was_inside_world = true
 else
     global.temp_was_inside_world = false

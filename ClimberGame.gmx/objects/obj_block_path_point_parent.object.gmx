@@ -53,9 +53,9 @@
     event_perform(ev_other,ev_user1) // user event 1 will assign the associated_point_x, associated_point_y, and next_path_point_direction
             
     path_add_point(associated_path,associated_point_x,associated_point_y,100)
-    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) == noone)
+    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone)
         change_path_world_collision(associated_path,path_get_number(associated_path)-2,0) // get second to last point, and it was not outside the world
-    if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) != noone)
+    if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone)
         change_path_world_collision(associated_path,path_get_number(associated_path)-2,1) // get second to last point, and it was outside the world
     //show_message("For path: " + string(associated_path) + "Associated Point: " + string(associated_point_x) + "," + string(associated_point_y))
     
@@ -67,14 +67,14 @@ else
 {
     if (global.temp_associated_path == associated_path)
     {
-        if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) == noone) // if neither this block nor previous block were inside world
+        if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone) // if neither this block nor previous block were inside world
         {
             path_set_closed(associated_path,true)   // if you were hit and are still on the same path, close the current path
             ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
             global.temp_path_list_position++
             global.temp_destroy_path_count++
         }
-        if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) != noone) // if this and previous block are inside world
+        if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone) // if this and previous block are inside world
         {
             ds_list_insert(global.path_list,global.temp_path_list_position,associated_path) // insert self path into list
             temp_list = ds_list_create() // create list to add to list
@@ -89,8 +89,8 @@ else
             ds_list_insert(global.world_adjacency_path_list,global.temp_world_adjacency_path_list_position++,temp_list2)
             global.temp_path_list_position++ // increase path placement index
             global.temp_destroy_path_count++ // we added another path, so make sure to destroy it
-            ds_map_add(global.path_map_next, associated_path, obj_world.associated_path)
-            ds_map_add(global.path_map_prev, associated_path, obj_world.associated_path)    //  the next and previous path for current path are world path.
+            ds_map_add(global.path_map_next, associated_path, global.world_path)
+            ds_map_add(global.path_map_prev, associated_path, global.world_path)    //  the next and previous path for current path are world path.
         }
     }
     else

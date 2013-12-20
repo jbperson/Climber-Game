@@ -1,8 +1,6 @@
 // This function will use the variable next_path_point_direction in order to find the next path_point_block
 // This function modifies the associated path for the next block in the path. It's called when we need to append two paths together
 
-//show_message("called")
-
 test_x = x
 test_y = y
 

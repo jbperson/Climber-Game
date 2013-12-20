@@ -1,18 +1,39 @@
 // This code sets up the initial left, right and in world platform lists from global.worl_list. It then creates all the currently present blocks
 
-global.left_platform_list = ds_list_create()
-global.right_platform_list = ds_list_create()
-global.in_world_platform_list = ds_list_create()
-global.path_destroy_list = ds_list_create()
-global.world_adjacency_path_list = ds_list_create()
+global.left_platform_list = ds_list_create()    // this list stores data for platforms to the left of the current screen
+global.right_platform_list = ds_list_create()   // this list stores data for platforms to the right of the current screen
+global.in_world_platform_list = ds_list_create()    // this list stores data for platforms currently in-world
+global.path_destroy_list = ds_list_create() //  this list stores the path ids of paths in the world so that we can destroy them when needed
+global.world_adjacency_path_list = ds_list_create() //  this list stores data for paths that are adjacent to the world path
 
-with(obj_world)
+global.world_path = path_add()  //  create global world_path
+path_add_point(global.world_path,x,y,100)   // add three arbitrary points. These are adjusted before the player locks onto that world
+path_add_point(global.world_path,x,y,100)
+path_add_point(global.world_path,x,y,100)
+
+world_half_travel_distance = 0 // this is used to tell us when to create new world pieces
+world_piece_index = 0 // used to say which block we're on
+
+// Create initial world halves. TODO: modify for starting partway through the world
+if(ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piece_index),0) == 0)
+    left_world_half = instance_create(world_center_x,world_center_y,ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piece_index),1))
+else
+    left_world_half = instance_create(world_center_x,world_center_y,obj_world_half)
+    
+if(ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piece_index),0) == 1)
+    right_world_half = instance_create(world_center_x,world_center_y,ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piece_index),1))
+else if(ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piece_index+1),0) == 1)
+    right_world_half = instance_create(world_center_x,world_center_y,ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piece_index+1),1))
+else
+    right_world_half = instance_create(world_center_x,world_center_y,obj_world_half)    //  the world pieces currently on screen
+    
+right_world_half.image_angle = 180 // flip right world half
+
+
+with(obj_world_parent)
 {
-    associated_path = path_add()
-    path_add_point(associated_path,x,y,100)
-    path_add_point(associated_path,x,y,100)
-    path_add_point(associated_path,x,y,100)
-    parent_block_list = -1 // set this to a null value so that it cannot be destroyed. TEMPORARY
+    associated_path = global.world_path
+    parent_block_list = -1// set this to a null value so that it cannot be destroyed. TEMPORARY
 }
 
 global.world_adjacency_path_list_current_index = 0

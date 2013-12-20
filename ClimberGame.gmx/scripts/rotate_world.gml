@@ -9,7 +9,10 @@ if(keyboard_check(ord('D')))
         obj_world_initialize_god.l_travel_distance -= ROTATION_SPEED * pi * WORLD_RADIUS / 180
     if (obj_world_initialize_god.r_travel_distance != -1000)
         obj_world_initialize_god.r_travel_distance += ROTATION_SPEED * pi * WORLD_RADIUS / 180
+    obj_world_initialize_god.world_half_travel_distance += ROTATION_SPEED * pi * WORLD_RADIUS / 180 // change half distance
         
+    world_half_check()
+    
     build_new_platforms_left_check()
 }
 if(keyboard_check(ord('A')))
@@ -22,7 +25,10 @@ if(keyboard_check(ord('A')))
         obj_world_initialize_god.l_travel_distance += ROTATION_SPEED * pi * WORLD_RADIUS / 180
     if (obj_world_initialize_god.r_travel_distance != -1000)
         obj_world_initialize_god.r_travel_distance -= ROTATION_SPEED * pi * WORLD_RADIUS / 180
+    obj_world_initialize_god.world_half_travel_distance += ROTATION_SPEED * pi * WORLD_RADIUS / 180 // change half distance
 
+    world_half_check()
+    
     build_new_platforms_right_check()
 }
 /*with(obj_player)

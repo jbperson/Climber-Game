@@ -4,7 +4,6 @@
 
 if(ds_map_exists(global.path_map_next,argument0))
 {
-    show_message("replacing :  "  + string(argument0) + " with " + string(argument1))
     replacement_value = ds_map_find_value(global.path_map_next,argument0)
     ds_map_add(global.path_map_next,argument1,replacement_value)
     ds_map_delete(global.path_map_next,argument0)

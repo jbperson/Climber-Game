@@ -55,12 +55,15 @@
     <sprite>sprites\spr_test_zone</sprite>
     <sprite>sprites\spr_globe_full</sprite>
     <sprite>sprites\spr_globe_half</sprite>
+    <sprite>sprites\spr_world_half_pit</sprite>
+    <sprite>sprites\spr_world_half_dif</sprite>
     <sprite>sprites\spr_badstuff</sprite>
     <sprite>sprites\spr_climb_block</sprite>
     <sprite>sprites\spr_block</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\background2</background>
     <background>background\background1</background>
   </backgrounds>
   <paths name="paths">
@@ -95,6 +98,7 @@
       <script>scripts\set_current_world_adjacency_path_list_index.gml</script>
       <script>scripts\make_player_world_path.gml</script>
       <script>scripts\get_path_direction.gml</script>
+      <script>scripts\hit_bad_block_from_walk.gml</script>
     </scripts>
     <scripts name="World Setup">
       <script>scripts\add_next_path_point_to_list.gml</script>
@@ -111,6 +115,7 @@
       <script>scripts\make_platforms_from_block_list.gml</script>
       <script>scripts\path_maps_create.gml</script>
       <script>scripts\make_bad_blocks.gml</script>
+      <script>scripts\make_world_piece_list.gml</script>
     </scripts>
     <scripts name="World Management">
       <script>scripts\build_new_platforms_right_check.gml</script>
@@ -125,6 +130,7 @@
       <script>scripts\rotate_world.gml</script>
       <script>scripts\rotate_paths_clockwise.gml</script>
       <script>scripts\rotate_paths_counterclockwise.gml</script>
+      <script>scripts\world_half_check.gml</script>
     </scripts>
     <script>scripts\get_line_y.gml</script>
     <script>scripts\get_line_y_point_slope.gml</script>
@@ -135,12 +141,10 @@
     <script>scripts\quadratic_root_2.gml</script>
     <script>scripts\TEST_check_world_adjacency_list.gml</script>
     <script>scripts\replace_paths_in_maps.gml</script>
-    <script>scripts\hit_bad_block_from_walk.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_block_test</object>
-    <object>objects\obj_world</object>
     <object>objects\obj_block_big_test</object>
     <object>objects\obj_block</object>
     <object>objects\obj_block_climbable</object>
@@ -160,6 +164,9 @@
     <object>objects\obj_path_drawer</object>
     <object>objects\obj_path_god_test_lvl</object>
     <object>objects\obj_path_god_jo_lvl</object>
+    <object>objects\obj_world_half</object>
+    <object>objects\obj_worlf_half_pit</object>
+    <object>objects\obj_world_half_different</object>
     <objects name="block parents">
       <object>objects\obj_block_parent</object>
       <object>objects\obj_climb_block_parent</object>
@@ -169,49 +176,62 @@
       <object>objects\obj_block_path_point_CtW_parent</object>
       <object>objects\obj_block_path_point_WtC_parent</object>
       <object>objects\obj_bad_block_parent</object>
+      <object>objects\obj_world_parent</object>
     </objects>
-    <object>objects\obj_block_path_point_CtW_UL</object>
-    <object>objects\obj_block_path_point_CtW_UR</object>
-    <object>objects\obj_block_path_point_CtW_DR</object>
-    <object>objects\obj_block_path_point_CtW_DL</object>
-    <object>objects\obj_block_path_point_WtC_UL</object>
-    <object>objects\obj_block_path_point_WtC_UR</object>
-    <object>objects\obj_block_path_point_WtC_DR</object>
-    <object>objects\obj_block_path_point_WtC_DL</object>
-    <object>objects\obj_block_path_point_climb_UL</object>
-    <object>objects\obj_block_path_point_climb_UR</object>
-    <object>objects\obj_block_path_point_climb_DR</object>
-    <object>objects\obj_block_path_point_climb_DL</object>
-    <object>objects\obj_block_path_point_climb_UL_concave</object>
-    <object>objects\obj_block_path_point_climb_UR_concave</object>
-    <object>objects\obj_block_path_point_climb_DR_concave</object>
-    <object>objects\obj_block_path_point_climb_DL_concave</object>
-    <object>objects\obj_block_path_point_UL</object>
-    <object>objects\obj_block_path_point_DL</object>
-    <object>objects\obj_block_path_point_DR</object>
-    <object>objects\obj_block_path_point_UR</object>
-    <object>objects\obj_block_path_point_UL_concave</object>
-    <object>objects\obj_block_path_point_UR_concave</object>
-    <object>objects\obj_block_path_point_DR_concave</object>
-    <object>objects\obj_block_path_point_DL_concave</object>
-    <object>objects\obj_block_path_point_end_UL</object>
-    <object>objects\obj_block_path_point_end_DL</object>
-    <object>objects\obj_block_path_point_end_DR</object>
-    <object>objects\obj_block_path_point_end_UR</object>
-    <object>objects\obj_bad_block</object>
-    <object>objects\obj_bad_block_up</object>
-    <object>objects\obj_bad_block_right</object>
-    <object>objects\obj_bad_block_down</object>
-    <object>objects\obj_bad_block_left</object>
+    <objects name="walkable blocks">
+      <object>objects\obj_block_path_point_UL</object>
+      <object>objects\obj_block_path_point_DL</object>
+      <object>objects\obj_block_path_point_DR</object>
+      <object>objects\obj_block_path_point_UR</object>
+      <object>objects\obj_block_path_point_UL_concave</object>
+      <object>objects\obj_block_path_point_UR_concave</object>
+      <object>objects\obj_block_path_point_DR_concave</object>
+      <object>objects\obj_block_path_point_DL_concave</object>
+      <object>objects\obj_block_path_point_end_UL</object>
+      <object>objects\obj_block_path_point_end_DL</object>
+      <object>objects\obj_block_path_point_end_DR</object>
+      <object>objects\obj_block_path_point_end_UR</object>
+    </objects>
+    <objects name="climbable blocks">
+      <object>objects\obj_block_path_point_climb_UL</object>
+      <object>objects\obj_block_path_point_climb_UR</object>
+      <object>objects\obj_block_path_point_climb_DR</object>
+      <object>objects\obj_block_path_point_climb_DL</object>
+      <object>objects\obj_block_path_point_climb_UL_concave</object>
+      <object>objects\obj_block_path_point_climb_UR_concave</object>
+      <object>objects\obj_block_path_point_climb_DR_concave</object>
+      <object>objects\obj_block_path_point_climb_DL_concave</object>
+    </objects>
+    <objects name="bad blocks">
+      <object>objects\obj_bad_block</object>
+      <object>objects\obj_bad_block_up</object>
+      <object>objects\obj_bad_block_right</object>
+      <object>objects\obj_bad_block_down</object>
+      <object>objects\obj_bad_block_left</object>
+    </objects>
+    <objects name="transfer blocks">
+      <object>objects\obj_block_path_point_CtW_UL</object>
+      <object>objects\obj_block_path_point_CtW_UR</object>
+      <object>objects\obj_block_path_point_CtW_DR</object>
+      <object>objects\obj_block_path_point_CtW_DL</object>
+      <object>objects\obj_block_path_point_WtC_UL</object>
+      <object>objects\obj_block_path_point_WtC_UR</object>
+      <object>objects\obj_block_path_point_WtC_DR</object>
+      <object>objects\obj_block_path_point_WtC_DL</object>
+    </objects>
+    <objects name="world setup">
+      <object>objects\obj_world_setup_god</object>
+      <object>objects\obj_zone_parent</object>
+      <object>objects\obj_zone</object>
+    </objects>
+    <objects name="debug objects">
+      <object>objects\obj_draw_test_thing</object>
+      <object>objects\obj_test_thing</object>
+      <object>objects\obj_draw_lines_world_path</object>
+      <object>objects\obj_test_zone</object>
+    </objects>
     <object>objects\obj_path_starter</object>
-    <object>objects\obj_test_zone</object>
-    <object>objects\obj_zone_parent</object>
-    <object>objects\obj_zone</object>
     <object>objects\obj_rot_god</object>
-    <object>objects\obj_test_thing</object>
-    <object>objects\obj_draw_test_thing</object>
-    <object>objects\obj_draw_lines_world_path</object>
-    <object>objects\obj_world_setup_god</object>
     <object>objects\obj_world_initialize_god</object>
     <object>objects\obj_player_start</object>
   </objects>

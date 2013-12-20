@@ -53,9 +53,9 @@
     event_perform(ev_other,ev_user1) // user event 1 will assign the associated_point_x, associated_point_y, and next_path_point_direction
      
     path_add_point(associated_path,associated_point_x,associated_point_y,100)
-    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) == noone)
+    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone)
         change_path_world_collision(associated_path,path_get_number(associated_path)-2,0) // get second to last point, and it was not outside the world
-    if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world,true,true) != noone)
+    if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone)
         change_path_world_collision(associated_path,path_get_number(associated_path)-2,1) // get second to last point, and it was outside the world
     //show_message("For path: " + string(associated_path) + "Associated Point: " + string(associated_point_x) + "," + string(associated_point_y))
     
@@ -66,14 +66,14 @@
     global.temp_path_list_position++
     global.temp_destroy_path_count++
     
-    if(collision_point(x,y,obj_world,true,true) != noone) // if this block is inside world. NOTE : previous block must be outside world
+    if(collision_point(x,y,obj_world_parent,true,true) != noone) // if this block is inside world. NOTE : previous block must be outside world
     {
             temp_list = ds_list_create() // create list to add to list
             ds_list_add(temp_list,path_get_point_x(associated_path,path_get_number(associated_path)-1))
             ds_list_add(temp_list,path_get_point_y(associated_path,path_get_number(associated_path)-1)) //  add path end point
             ds_list_add(temp_list,associated_path)              //  add path id to list of adjacency data
             ds_list_insert(global.world_adjacency_path_list,global.temp_world_adjacency_path_list_position++,temp_list) // add list of adjacency data to the world adjacency list.
-            ds_map_add(global.path_map_next, associated_path, obj_world.associated_path)
+            ds_map_add(global.path_map_next, associated_path, global.world_path)
     }
 }
 </string>

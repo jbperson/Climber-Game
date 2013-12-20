@@ -8,7 +8,7 @@
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
   <bbox_right>768</bbox_right>
-  <bbox_top>0</bbox_top>
+  <bbox_top>13</bbox_top>
   <bbox_bottom>383</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
@@ -19,6 +19,6 @@
   <width>769</width>
   <height>384</height>
   <frames>
-    <frame index="0">images\spr_globe_half_0.png</frame>
+    <frame index="0">images\spr_world_half_pit_0.png</frame>
   </frames>
 </sprite>

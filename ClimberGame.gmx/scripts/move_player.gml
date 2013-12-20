@@ -8,7 +8,7 @@ if (movement_locked) // movement is locked if we are on a path, ie on the ground
         image_angle = direction
         
     // This is a temp fix until auto jump is handled better - makes sure you don't jump off of the face of the earth for no reason    
-    if (movement_path == obj_world.associated_path && abs(direction - previous_direction) <= 10)
+    if (movement_path == global.world_path && abs(direction - previous_direction) <= 10)
         previous_direction = direction
 
     if(place_meeting(x,y,obj_bad_block))
@@ -85,9 +85,9 @@ else //else movement is unlocked
         //temp_block_collided = collision_rectangle(x-15,y-16,x+16,y+16,obj_block_parent,true,true)
         temp_block_collided = collision_circle(x,y,16,obj_block_parent,true,true)
         
-        if (temp_block_collided != noone && (temp_block_collided.object_index != obj_world || point_distance(obj_world.x,obj_world.y,x,y) <= WORLD_RADIUS + 16))
+        if (temp_block_collided != noone && (temp_block_collided.object_index != obj_world_parent || point_distance(obj_world_initialize_god.world_center_x,obj_world_initialize_god.world_center_y,x,y) <= WORLD_RADIUS + 16))
         {   
-            if (temp_block_collided.object_index == obj_world){
+            if (object_is_ancestor(temp_block_collided.object_index,obj_world_parent)){
                 make_player_world_path(1)
                 path_move_speed = 0
                 set_current_world_adjacency_path_list_index() // sets the ccurrent world adjacency path list index to the proper place in the list

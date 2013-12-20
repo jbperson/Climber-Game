@@ -37,7 +37,7 @@ global.path_inside_world = false
 
 with(collision_point(x,y,obj_block_path_point_parent,false,true))
 {
-    if(collision_point(x,y,obj_world,true,true) != noone)
+    if(collision_point(x,y,obj_world_parent,true,true) != noone)
         global.temp_was_inside_world = true
     else
         global.temp_was_inside_world = false
@@ -60,7 +60,7 @@ with(collision_point(x,y,obj_block_path_point_parent,false,true))
 
 with(collision_point(x,y,obj_block_path_point_climb_parent,false,true))
 {
-    if(collision_point(x,y,obj_world,true,true) != noone)
+    if(collision_point(x,y,obj_world_parent,true,true) != noone)
         global.temp_was_inside_world = true
     else
         global.temp_was_inside_world = false
