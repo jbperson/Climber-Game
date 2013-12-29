@@ -217,7 +217,7 @@ previous_direction = 0
             <string>//TEST_check_world_adjacency_list()
 //show_message("Position:  " + string(x) + ", " + string(y))
 //show_message("World path : " + string(obj_world.associated_path))
-show_message("next map size: " + string(ds_map_size(global.path_map_next)))
+/*show_message("next map size: " + string(ds_map_size(global.path_map_next)))
 
 tempkey = ds_map_find_first(global.path_map_next)
     show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_next,tempkey)))
@@ -225,7 +225,11 @@ while(tempkey != ds_map_find_last(global.path_map_next))
 {
         tempkey = ds_map_find_next(global.path_map_next,tempkey)
     show_message("Key : " + string(tempkey) + ", Value : " + string(ds_map_find_value(global.path_map_next,tempkey)))
-}
+}*/
+
+DEBUG_show_size_and_contents_of_list(global.left_platform_list,"Left Plats")
+DEBUG_show_size_and_contents_of_list(global.in_world_platform_list,"In World Plats")
+DEBUG_show_size_and_contents_of_list(global.right_platform_list,"Right Plats")
 </string>
           </argument>
         </arguments>

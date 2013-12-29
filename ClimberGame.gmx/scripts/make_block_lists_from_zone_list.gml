@@ -13,4 +13,6 @@ for(index = 3 ; index < ds_list_size(make_zone_list) ; index++)
     make_platforms_from_block_list(ds_list_find_value(make_zone_list,index),mrk_zone_x,mrk_zone_y)
 }
 
+sort_world_adjacency_list()
+
 return global.temp_destroy_path_count

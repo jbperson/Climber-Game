@@ -51,13 +51,52 @@
             <string>if (!placed_into_path) // if not yet in a path
 {
     event_perform(ev_other,ev_user1) // user event 1 will assign the associated_point_x, associated_point_y, and next_path_point_direction
+           
+    // The following block looks at this point and the previous point and modifies the path correctly
+    if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone) // if both are outside 
+        path_add_point(associated_path,associated_point_x,associated_point_y,100)
+    else if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone) // if previous was inside but this is outside
+    {
+        path_add_point(associated_path,associated_point_x,associated_point_y,100)
+        change_path_world_collision(associated_path,path_get_number(associated_path)-2,0) // get previous point and correctly change it
+        
+        //insert this path into the world adjacency list
+        temp_list2 = ds_list_create() // create list to add to list
+        ds_list_add(temp_list2,path_get_point_x(associated_path,path_get_number(associated_path)-1))
+        ds_list_add(temp_list2,path_get_point_y(associated_path,path_get_number(associated_path)-1))
+        ds_list_add(temp_list2,associated_path)
+        ds_list_insert(global.world_adjacency_path_list,global.temp_world_adjacency_path_list_position++,temp_list2) 
+        ds_map_add(global.path_map_prev, associated_path, global.world_path)    //  the previous path for current path is world path.
+    }
+    else if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone) // if previous was outside but this is inside
+    {
+        path_add_point(associated_path,associated_point_x,associated_point_y,100) // add self
+        change_path_world_collision(associated_path,path_get_number(associated_path)-2,1) // get previous point and change it
+        
+        // Handle path completion
+        ds_list_insert(global.path_list,global.temp_path_list_position,associated_path) // insert self path into list
+        temp_list = ds_list_create() // create list to add to list
+        ds_list_add(temp_list,path_get_point_x(associated_path,path_get_number(associated_path)-1))
+        ds_list_add(temp_list,path_get_point_y(associated_path,path_get_number(associated_path)-1))
+        ds_list_add(temp_list,associated_path)
+        ds_list_insert(global.world_adjacency_path_list,global.temp_world_adjacency_path_list_position++,temp_list) // add list of adjacency data to the world adjacency list.
+        global.temp_path_list_position++ // increase path placement index
+        global.temp_destroy_path_count++ // we added another path, so make sure to destroy it
+        ds_map_add(global.path_map_next, associated_path, global.world_path)
             
-    path_add_point(associated_path,associated_point_x,associated_point_y,100)
+        associated_path = path_add() // create new path. New points will be added to this path
+    }
+    else if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone) // if both this and previous points were inside
+    {
+        path_delete_point(associated_path,path_get_number(associated_path)-1) // delete previous point
+        path_add_point(associated_path,associated_point_x,associated_point_y,100) // add self
+    }
+ /*   path_add_point(associated_path,associated_point_x,associated_point_y,100)
     if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone)
         change_path_world_collision(associated_path,path_get_number(associated_path)-2,0) // get second to last point, and it was not outside the world
     if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone)
         change_path_world_collision(associated_path,path_get_number(associated_path)-2,1) // get second to last point, and it was outside the world
-    //show_message("For path: " + string(associated_path) + "Associated Point: " + string(associated_point_x) + "," + string(associated_point_y))
+  */  //show_message("For path: " + string(associated_path) + "Associated Point: " + string(associated_point_x) + "," + string(associated_point_y))
     
     placed_into_path = true
     
@@ -65,7 +104,58 @@
 }
 else
 {
-    if (global.temp_associated_path == associated_path)
+    if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone) // if both are inside
+    {
+        path_delete(global.temp_associated_path)
+    }
+    else if(global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone) //if previous was inside and this is outside
+    {
+        // since this can ONLY happen when the paths are different, we always do this case
+        path_add_point(global.temp_associated_path,associated_point_x,associated_point_y,100) // add self to previous path
+        change_path_world_collision(global.temp_associated_path,path_get_number(associated_path)-2,0) // get previous point and correctly change it
+        
+        // append the paths together
+        path_append(global.temp_associated_path,associated_path)   //else we need to join the two paths  
+        replace_paths_in_maps(associated_path,global.temp_associated_path)
+        associated_path = global.temp_associated_path  //  and consider yourself part of the new appended path
+        modify_path_from_append_next_path_point_block()
+    }
+    else if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) != noone) // if previous point was outside but this is inside
+    {
+        associated_path = global.temp_associated_path
+    
+        path_add_point(associated_path,associated_point_x,associated_point_y,100) // add self to previous path
+        change_path_world_collision(associated_path,path_get_number(associated_path)-2,1) // get previous point and change it
+        
+        // Handle path completion
+        ds_list_insert(global.path_list,global.temp_path_list_position,associated_path) // insert self path into list
+        temp_list = ds_list_create() // create list to add to list
+        ds_list_add(temp_list,path_get_point_x(associated_path,path_get_number(associated_path)-1))
+        ds_list_add(temp_list,path_get_point_y(associated_path,path_get_number(associated_path)-1))
+        ds_list_add(temp_list,associated_path)
+        ds_list_insert(global.world_adjacency_path_list,global.temp_world_adjacency_path_list_position++,temp_list) // add list of adjacency data to the world adjacency list.
+        global.temp_path_list_position++ // increase path placement index
+        global.temp_destroy_path_count++ // we added another path, so make sure to destroy it
+        ds_map_add(global.path_map_next, associated_path, global.world_path)
+    }
+    else if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone) // if neither point was inside
+    {
+        if(global.temp_associated_path == associated_path) // if the same path
+        {
+            path_set_closed(associated_path,true)   // if you were hit and are still on the same path, close the current path
+            ds_list_insert(global.path_list,global.temp_path_list_position,associated_path)
+            global.temp_path_list_position++
+            global.temp_destroy_path_count++
+        }
+        else // if not the same path
+        {
+            path_append(global.temp_associated_path,associated_path)   //else we need to join the two paths 
+            replace_paths_in_maps(associated_path,global.temp_associated_path)       
+            associated_path = global.temp_associated_path  //  and consider yourself part of the new appended path             
+            modify_path_from_append_next_path_point_block()
+        }
+    }
+ /*   if (global.temp_associated_path == associated_path)
     {
         if(!global.temp_was_inside_world &amp;&amp; collision_point(x,y,obj_world_parent,true,true) == noone) // if neither this block nor previous block were inside world
         {
@@ -102,7 +192,7 @@ else
         associated_path = global.temp_associated_path  //  and consider yourself part of the new appended path
               
         modify_path_from_append_next_path_point_block()
-    }
+    }*/
 }
 </string>
           </argument>

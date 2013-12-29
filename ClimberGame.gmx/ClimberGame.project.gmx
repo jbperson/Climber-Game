@@ -116,6 +116,8 @@
       <script>scripts\path_maps_create.gml</script>
       <script>scripts\make_bad_blocks.gml</script>
       <script>scripts\make_world_piece_list.gml</script>
+      <script>scripts\replace_paths_in_maps.gml</script>
+      <script>scripts\sort_world_adjacency_list.gml</script>
     </scripts>
     <scripts name="World Management">
       <script>scripts\build_new_platforms_right_check.gml</script>
@@ -140,7 +142,7 @@
     <script>scripts\quadratic_root_1.gml</script>
     <script>scripts\quadratic_root_2.gml</script>
     <script>scripts\TEST_check_world_adjacency_list.gml</script>
-    <script>scripts\replace_paths_in_maps.gml</script>
+    <script>scripts\DEBUG_show_size_and_contents_of_list.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -221,6 +223,7 @@
     </objects>
     <objects name="world setup">
       <object>objects\obj_world_setup_god</object>
+      <object>objects\obj_path_starter</object>
       <object>objects\obj_zone_parent</object>
       <object>objects\obj_zone</object>
     </objects>
@@ -230,7 +233,6 @@
       <object>objects\obj_draw_lines_world_path</object>
       <object>objects\obj_test_zone</object>
     </objects>
-    <object>objects\obj_path_starter</object>
     <object>objects\obj_rot_god</object>
     <object>objects\obj_world_initialize_god</object>
     <object>objects\obj_player_start</object>
@@ -243,6 +245,7 @@
     <room>rooms\test_lvl</room>
     <room>rooms\room0</room>
     <room>rooms\room2</room>
+    <room>rooms\room7</room>
   </rooms>
   <constants number="8">
     <constant name="CORNER_BLOCK_DIST">sqrt(2*(24*24))</constant>

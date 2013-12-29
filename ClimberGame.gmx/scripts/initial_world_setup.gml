@@ -11,7 +11,7 @@ path_add_point(global.world_path,x,y,100)   // add three arbitrary points. These
 path_add_point(global.world_path,x,y,100)
 path_add_point(global.world_path,x,y,100)
 
-world_half_travel_distance = 0 // this is used to tell us when to create new world pieces
+world_half_travel_distance = world_start_x // this is used to tell us when to create new world pieces
 world_piece_index = 0 // used to say which block we're on
 
 // Create initial world halves. TODO: modify for starting partway through the world
@@ -27,7 +27,8 @@ else if(ds_list_find_value(ds_list_find_value(global.world_piece_list,world_piec
 else
     right_world_half = instance_create(world_center_x,world_center_y,obj_world_half)    //  the world pieces currently on screen
     
-right_world_half.image_angle = 180 // flip right world half
+left_world_half.image_angle = (world_start_x/(WORLD_RADIUS*2*pi))*360    
+right_world_half.image_angle = left_world_half.image_angle + 180 // flip right world half
 
 
 with(obj_world_parent)
@@ -56,9 +57,9 @@ for(i = 0 ; i < ds_list_size(global.world_list) ; i++)
 global.temp_path_list_position = 0
 global.temp_world_adjacency_path_list_position = 0
 
-for(i = 0 ; i < ds_list_size(global.in_world_platform_list) ; i++)
+for(var ii = 0 ; ii < ds_list_size(global.in_world_platform_list) ; ii++)
 {
-    temp_direction_destroy_path_count = make_block_lists_from_zone_list(ds_list_find_value(global.in_world_platform_list,i))
+    temp_direction_destroy_path_count = make_block_lists_from_zone_list(ds_list_find_value(global.in_world_platform_list,ii))
     
     ds_list_add(global.path_destroy_list,temp_direction_destroy_path_count) // add the number of paths to destroy to the path to destroy list
 } // for each zone list in the world right now, create the platforms for it
@@ -72,6 +73,8 @@ if (ds_list_size(global.right_platform_list) != 0)
     r_travel_distance = ds_list_find_value(ds_list_find_value(global.right_platform_list,0),0) - (current_world_x + (pi*WORLD_RADIUS))// - ((current_world_x + (pi * WORLD_RADIUS)) - ds_list_find_value(ds_list_find_value(global.in_world_platform_list,ds_list_size(global.in_world_platform_list) - 1),0))// see above
 else
     r_travel_distance = -1000 // see above
+    
+sort_world_adjacency_list()
     
 player_start_angle = (global.player_start_x - current_world_x) * 180 / (pi* WORLD_RADIUS)
 player_start_dist = (current_world_y - global.player_start_y)
